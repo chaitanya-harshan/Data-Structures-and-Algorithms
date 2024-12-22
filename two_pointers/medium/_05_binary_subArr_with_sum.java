@@ -1,4 +1,4 @@
-package two_pointers.medium;
+package two_pointers_sliding_window.medium;
 
 // similar to that weird string problem
 public class _05_binary_subArr_with_sum {
