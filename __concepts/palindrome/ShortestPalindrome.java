@@ -3,6 +3,7 @@ package __concepts.palindrome;
 public class ShortestPalindrome {
     // Hard difficulty
     // Reference: https://www.youtube.com/watch?v=niOT-FK1RH8
+    // Rabin karp [or] Rolling Hash Algorithm
     /* 
      * Intuition and Concept:
      * 1. We want to find the longest palindrome prefix in the string
