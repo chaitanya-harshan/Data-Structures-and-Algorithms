@@ -1,6 +1,6 @@
 package __concepts.palindrome;
 
-public class ShortestPalindrome {
+public class shortest_Palindrome_HARD {
     // Hard difficulty
     // Reference: https://www.youtube.com/watch?v=niOT-FK1RH8
     // Rabin karp [or] Rolling Hash Algorithm
