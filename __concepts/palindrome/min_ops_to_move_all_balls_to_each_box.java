@@ -1,4 +1,4 @@
-package arrays.prefix;
+package __concepts.palindrome;
 
 public class min_ops_to_move_all_balls_to_each_box {
     

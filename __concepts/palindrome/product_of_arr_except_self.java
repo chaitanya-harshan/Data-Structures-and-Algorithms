@@ -1,4 +1,4 @@
-package arrays.prefix;
+package __concepts.palindrome;
 
 public class product_of_arr_except_self {
     
