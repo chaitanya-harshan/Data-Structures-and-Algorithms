@@ -1,4 +1,4 @@
-package bit_manipulation.Extras;
+package bit_manipulation.extras;
 
 public class count_bits_dp {
     
