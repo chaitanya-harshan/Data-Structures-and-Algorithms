@@ -1,4 +1,4 @@
-package __concepts.hashing;
+package _concepts.hashing_and_counting;
 
 public class first_completely_painted_row_or_col {
 

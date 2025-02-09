@@ -1,4 +1,4 @@
-package __concepts.hashing;
+package _concepts.hashing_and_counting;
 
 import java.util.HashMap;
 
