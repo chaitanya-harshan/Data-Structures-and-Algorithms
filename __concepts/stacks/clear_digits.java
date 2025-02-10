@@ -2,16 +2,14 @@ package __concepts.stacks;
 
 import java.util.Stack;
 
-public class clearDigits {
-    
-    public String clearDigits(String s) {
+public class clear_digits {
+    public String clearDigitsMethod(String s) {
         Stack<Character> st = new Stack<>();
 
         for (char c: s.toCharArray()) {
             if (Character.isDigit(c)) {
                 if (!st.empty()) st.pop();
-            }
-            else st.push(c);
+            } else st.push(c);
         }
 
         StringBuilder res = new StringBuilder();
