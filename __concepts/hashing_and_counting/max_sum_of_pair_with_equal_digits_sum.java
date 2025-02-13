@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 public class max_sum_of_pair_with_equal_digits_sum {
     public int maximumSum(int[] nums) {
         int n = nums.length;
