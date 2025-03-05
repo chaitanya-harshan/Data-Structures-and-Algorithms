@@ -48,4 +48,13 @@ Explanation: After 2 minutes, there are 4 colored cells on the boundary and 1 in
 Constraints:
 
 1 <= n <= 105
+
  */
+//                     []
+//        []         [][][]
+//  []  [][][]     [][][][][]
+//        []         [][][]
+//                     []
+    
+//   1     2            3
+//   1 +4  5   +8       13
