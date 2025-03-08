@@ -1,4 +1,4 @@
-package two_pointers_sliding_window.extra;
+package __concepts.two_pointers;
 
 import java.util.HashMap;
 
