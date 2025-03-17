@@ -1,6 +1,35 @@
 package __concepts.binarySearch;
 
 public class zero_arr_transformation_2 {
+    // NOT BINARY SEARCH
+    public int minZeroArray1(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int[] diff = new int[n];
+        int q = 0;
+        int decrement = 0;
+
+        for (int i=0; i<n; i++) {
+            while (decrement + diff[i] < nums[i]) {
+                if (q == queries.length) return -1;
+
+                int l = queries[q][0];
+                int r = queries[q][1];
+                int val = queries[q][2];
+                q++;
+
+                if (r >= i) {
+                    diff[Math.max(l,i)] += val;
+                    if (r+1 < n) diff[r+1] -= val;
+                }
+            }
+            decrement += diff[i];
+        }
+        return q;
+    }
+
+
+// ----------------------------------------------------------------------------------------------------------------------
+    // BINARY SEARCH
     public int minZeroArray(int[] nums, int[][] queries) {
         int n = nums.length;
         int low = 0, high = queries.length;
