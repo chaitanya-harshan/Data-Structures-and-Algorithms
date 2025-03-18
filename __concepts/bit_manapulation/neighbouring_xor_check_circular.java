@@ -1,4 +1,4 @@
-package bit_manipulation.extras;
+package __concepts.bit_manapulation;
 
 /**
  * The neighbouring_xor_check_circular class provides a method to check if a valid original array exists

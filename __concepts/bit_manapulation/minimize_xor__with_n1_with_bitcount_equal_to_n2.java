@@ -1,4 +1,4 @@
-package bit_manipulation.extras;
+package __concepts.bit_manapulation;
 
 public class minimize_xor__with_n1_with_bitcount_equal_to_n2 {
     

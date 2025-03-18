@@ -1,4 +1,4 @@
-package bit_manipulation.extras;
+package __concepts.bit_manapulation;
 
 public class xor_of_all_pairs_of_2_arrs {
     ublic int xorAllNums(int[] nums1, int[] nums2) {
