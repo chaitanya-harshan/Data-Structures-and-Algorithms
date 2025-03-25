@@ -1,4 +1,4 @@
-package __concepts_mixed.sorting_and_range;
+package __concepts_mixed.sorting_and_intervals;
 
 import java.util.Arrays;
 // You can't use prefix here because it will exceed the range. 
