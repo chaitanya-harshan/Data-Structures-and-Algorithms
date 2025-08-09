@@ -42,7 +42,7 @@ public class _05_subarray_with_xor_k {
 }
 
 /*
-https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqazg2M0NmYktuQlZEZE5MS1FKaTF3bXJWUExtQXxBQ3Jtc0ttTUw2eXlPTUlSYUVRU1FVZElxQ3RTZFRrWllBTGdzVXFpc1FjZEZiV2g1bUdEX01nNE5vUTdmZlJuRWxMZXVYd3F2ajdtSEhjMmhKZE1ndWNBMk85bjlqQl90ZVdrVU9XdFJhcTh6bUVSX3UzMWdtVQ&q=https%3A%2F%2Fbit.ly%2F3jLfElm&v=eZr-6p0B7ME
+https://www.youtube.com/watch?v=eZr-6p0B7ME
  * Given an array ‘A’ consisting of ‘N’ integers and an integer ‘B’, find the number of subarrays of array ‘A’ 
  * whose bitwise XOR( ⊕ ) of all elements is equal to ‘B’.
 A subarray of an array is obtained by removing some(zero or more) elements from the front and back of the array.
