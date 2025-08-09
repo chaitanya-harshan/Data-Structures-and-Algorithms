@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/__concepts/__concepts.iml" filepath="$PROJECT_DIR$/__concepts/__concepts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arrays/arrays.iml" filepath="$PROJECT_DIR$/arrays/arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dp/dp.iml" filepath="$PROJECT_DIR$/dp/dp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dsa.iml" filepath="$PROJECT_DIR$/dsa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neetcode/neetcode.iml" filepath="$PROJECT_DIR$/neetcode/neetcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dp/sde/sde.iml" filepath="$PROJECT_DIR$/dp/sde/sde.iml" />
+      <module fileurl="file://$PROJECT_DIR$/two_pointers/two_pointers.iml" filepath="$PROJECT_DIR$/two_pointers/two_pointers.iml" />
+    </modules>
+  </component>
+</project>
