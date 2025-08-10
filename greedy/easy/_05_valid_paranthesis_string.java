@@ -21,9 +21,15 @@ public class _05_valid_paranthesis_string {
 
             if (max < 0) return false; // case: ))((
             if (min < 0) min = 0; // here we are basically saying ok the previous
-            // '*' must be open and not close else no. of open '(' will become negative
+            // * must be neutral and not ) else no. of open '(' will become negative 
+            // and we know there was a * before because otherwise max would have been negative
         }
-        return min == 0;
+        return min == 0; // (min is always >= 0) Here we are checking min is not > 0
+        // Here the philosophy is that we are checking from the negative spectrum
+        // so we assume * to be neutral or '(' only when min goes negative like a lifeline.
+        // We try to make min close to 0 as possible.
+        // we say all are ) unless we can't (min goes -ve) and then we assume * to be ( or neutral.
+        // thats why I say its checking from the negative spectrum.
     }
 }
 

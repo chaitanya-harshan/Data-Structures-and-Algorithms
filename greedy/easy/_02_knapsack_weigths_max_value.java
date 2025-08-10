@@ -1,4 +1,6 @@
 /*
+https://www.naukri.com/code360/problems/fractional-knapsack_975286
+
  * You have been given weights and values of ‘N’ items. You are also given a knapsack of size ‘W’.
 
 Your task is to put the items in the knapsack such that the total value of items in the knapsack is maximum.

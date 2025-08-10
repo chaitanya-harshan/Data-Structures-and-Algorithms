@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _03_min_coins {
+    public static void main(String[] args) {
+        int N = 121;
+        List<Integer> result = minCoins(N);
+        System.out.println("Minimum coins for " + N + ": " + result);
+        System.out.printf("Coins used: %d", result.get(0));
+        // System.out.printf("Coins used:", result);
+    }
 
     static List<Integer> minCoins(int N) {
         ArrayList<Integer> list = new ArrayList<>();
