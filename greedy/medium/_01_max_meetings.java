@@ -30,7 +30,7 @@ public class _01_max_meetings {
 
         Arrays.sort(meet, (a,b) -> a[1]-b[1]);
         int meetings = 0;
-        int avaliable_since = 0;
+        int avaliable_since = -1; // for the case where first meeting starts at 0 else we can use available_since = 0 instead of -1
         for (int[] meeting: meet) {
             if (meeting[0] > avaliable_since) {
                 meetings++;
