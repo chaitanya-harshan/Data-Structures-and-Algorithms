@@ -67,7 +67,10 @@ public class _04_max_platforms {
 
 // ____________________________________________________________________________________________________________________________________
 
-    // WON"T WORK
+    // ______________WON"T WORK_______________________
+
+
+    
     /*
      * What’s broken
     You sort trains by arrival and keep a flag pointing to the “oldest” train. But you never track the earliest departure among the active trains—trains[flag][1] is just the departure of the earliest arrival, which might leave last. So you can overcount badly.
@@ -76,7 +79,7 @@ public class _04_max_platforms {
     A (100, 500), B (200, 210), C (220, 230)
     Your loop says at 220 → 3 platforms. Reality: B left at 210, so it’s 2.
 
-    you need to use pq and store the departure times to always check for the earliest departure 
+you need to use pq and store the departure times to always check for the earliest departure 
     instead of the earliest (flag) train always to make this work
      */
     public static int calculateMinPlatforms1(int at[], int dt[], int n) {

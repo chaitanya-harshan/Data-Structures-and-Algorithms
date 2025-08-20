@@ -27,9 +27,11 @@ public class _09_insert_interval {
             i++;
         }
 
-        int[][] res = new int[list.size()][];
-        list.toArray(res);
-        return res;
+        // int[][] res = new int[list.size()][];
+        // list.toArray(res);
+        // return res;
+        // return list.toArray(new int[list.size()][]);
+        return list.toArray(int[][]::new);
     }
 
     // public int[][] insert(int[][] intervals, int[] newInterval) {

@@ -18,9 +18,12 @@ public class _03_jump_game_2 {
         return jumps;
     }
 
+    // **********************************************
+    // Optimized greedy approach: O(n) | S: O(1)
+    // This approach uses a single pass to determine the minimum number of jumps required to reach the last index.
     public int jump1(int[] nums) {
-        int curEnd = 0; // not left (this is also right)
-        int far = 0; // furthest right (boundary)
+        int curEnd = 0; // not left (this is also right) - limit-right
+        int far = 0; // furthest right (boundary) - frontier right
         int n = nums.length;
         int jumps = 0;
 

@@ -11,11 +11,16 @@ public class _08_lru_cache {
             this.val = val;
         }
     }
+
+    //____________________________________________________________________________________________
     int capacity;
     HashMap<Integer, Node> cache = new HashMap<>();
+    
     Node lp = new Node(0,0); // points to the actual lru
     Node mp = new Node(0,0); // . . . actual mru
     // lp -> [lru] -> [] ->...-> [] -> [mru] -> mp
+    //____________________________________________________________________________________________
+    
 
     public _08_lru_cache(int capacity) {
         this.capacity = capacity;

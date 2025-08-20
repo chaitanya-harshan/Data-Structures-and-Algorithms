@@ -11,7 +11,6 @@ package greedy.medium;
 
 import java.util.Arrays;
 
-
 public class _01_max_meetings {
     
     public static void main(String[] args) {
