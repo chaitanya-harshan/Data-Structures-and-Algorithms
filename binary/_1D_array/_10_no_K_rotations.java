@@ -9,39 +9,70 @@ public class _10_no_K_rotations {
         int[] arr1 = {4,5,6,7,1,2,3};
         // int[] arr1 = {11,13,15,17};
         int[] arr = {1};
-        System.out.println(rotations(arr1));
+        System.out.println(findKRotation(arr1));
     }
 
-    static int rotations(int[] nums) {
-        int low = 0, high = nums.length-1;
+    public static int findKRotation(int []arr){
+        // Write your code here.
+        int l =0, h =  arr.length -1;
         int min = Integer.MAX_VALUE;
-        int index = 0;
+        int i = -1;
 
-        while (low <= high) {
-            int mid = (low+high)/2;
-            if( nums[low] <= nums[high]){  // in <= '=' is for when [1] element 
-                if (nums[low] < min) {
-                    min = nums[low];
-                    index = low;
+        while (l <= h) {
+            int m = l+h >> 1;
+            if (arr[l] < arr[h]) {
+                if (arr[l] < min) {
+                    min = arr[l];
+                    i = l;
                 }
                 break;
             }
 
-            if (nums[low] <= nums[mid]) {
-                if (nums[low] < min) {
-                    min = nums[low];
-                    index = low;
+            if (arr[l] <= arr[m]) {
+                if (arr[l] < min) {
+                    min = arr[l];
+                    i = l;
                 }
-                low = mid + 1;
+                l = m +1;
             }
             else {
-                if (nums[mid] < min) {
-                    min = nums[mid];
-                    index = mid;
+                if (arr[m] < min) {
+                    min = arr[m];
+                    i = m;
                 }
-                high = mid-1;
+                h = m-1;
             }
         }
-        return index;
+        return i;
     }
 }
+
+/*
+ * 
+ * https://www.naukri.com/code360/problems/rotation_7449070
+ * 
+ * You are given an array 'arr' having 'n' distinct integers sorted in ascending order. The array is right rotated 'r' times
+
+
+
+Find the minimum value of 'r'.
+
+
+
+Right rotating an array means shifting the element at 'ith' index to (‘i+1') mod 'n' index, for all 'i' from 0 to ‘n-1'.
+
+
+
+Example:
+Input: 'n' = 5 , ‘arr’ = [3, 4, 5, 1, 2]
+
+Output: 3 
+
+Explanation:
+If we rotate the array [1 ,2, 3, 4, 5] right '3' times then we will get the 'arr'. Thus 'r' = 3.
+
+Constraints:
+1 <= ‘n’ <= 10^5    
+1 <= ‘arr[i]’ <= 10^9
+Time Limit: 1 sec
+ */

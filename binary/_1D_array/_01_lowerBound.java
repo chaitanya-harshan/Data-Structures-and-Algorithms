@@ -3,11 +3,13 @@ package binary._1D_array;
 public class _01_lowerBound {
     
     public static void main(String[] args) {
-        int[] arr = {3, 5,7, 8,8,8, 15, 19};
+        int[] arr = {3,4,5,7, 8,8,8, 15, 19};
         // int lowerBound = search(arr, 9);
         int lowerBound = lowerBoundindex(arr, 10);
         System.out.println(lowerBound);
         System.out.println(lowerBoundindex(arr, 6));
+        System.out.println(lowerBoundindex(arr, 7));
+        System.out.println(lowerBoundindex(arr, 8));
     }
 
     static int lowerBoundindex(int[] nums, int target) {

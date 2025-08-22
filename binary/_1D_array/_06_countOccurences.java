@@ -5,8 +5,10 @@ public class _06_countOccurences {
         int count = count(new int[]{1,1,1,2,2,3,3}, 7, 3);
         System.out.println(count);
     }
+
+    // you can use lower_bound and upper_bound functions also
+    // super similar to _05_first_last_pos.java (code is better there)
     public static int count(int nums[], int n, int target) {
-        //Your code goes here
         int fp = firstIndex(nums, target);
         // int lp = lastIndex(nums, target);
         if (fp == -1) return 0;
@@ -47,3 +49,24 @@ public class _06_countOccurences {
         return last;
     }
 }
+
+/*
+https://www.naukri.com/code360/problems/occurrence-of-x-in-a-sorted-array_630456
+
+ * Problem statement
+You have been given a sorted array/list of integers 'arr' of size 'n' and an integer 'x'.
+
+
+
+Find the total number of occurrences of 'x' in the array/list.
+
+
+
+Example:
+Input: 'n' = 7, 'x' = 3
+'arr' = [1, 1, 1, 2, 2, 3, 3]
+
+Output: 2
+
+Explanation: Total occurrences of '3' in the array 'arr' is 2.
+ */

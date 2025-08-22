@@ -6,9 +6,10 @@ public class _02_upperBound {
         int[] arr = {3, 5, 8, 9,9,9,15, 19};
         // int upperBound = search(arr, 9);
         int upperBound = upperBoundindex(arr, 9);
-        System.out.println(_01_lowerBound.lowerBoundindex(arr, 9));
         System.out.println(upperBound);
+        System.out.println(_01_lowerBound.lowerBoundindex(arr, 9));
         System.out.println(upperBoundindex(arr, 10));
+        System.out.println(upperBoundindex(arr, 5));
     }
 
     static int upperBoundindex(int[] nums, int target) {
