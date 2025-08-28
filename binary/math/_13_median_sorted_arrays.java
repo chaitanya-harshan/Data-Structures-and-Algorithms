@@ -19,11 +19,12 @@ public class _13_median_sorted_arrays {
         // h is n1-1 because 'n1-1' means all elements taken from a[]
         while (l <= h) {
             int m = l+h >> 1;
+            int bi = half - m - 2; // bi is the index of the last element of left part of b[]
 
             int Al = (m >= 0) ? a[m] : Integer.MIN_VALUE; // [3,4] [1,2,5,6]
             int Ar = (m+1 < n1) ? a[m+1] : Integer.MAX_VALUE; // [1,2,3] [4,5,6,7]
-            int Bl = (half-m-2 >= 0) ? b[half - m - 2] : Integer.MIN_VALUE; // [1,2,3] [4,5,6,7]
-            int Br = (half-m-1 < n2) ? b[half - m - 1] : Integer.MAX_VALUE; // [7,8,9] [1,2,3,4,5,6] 
+            int Bl = (bi >= 0) ? b[bi] : Integer.MIN_VALUE; // [1,2,3] [4,5,6,7]
+            int Br = (bi+1 < n2) ? b[bi+1] : Integer.MAX_VALUE; // [7,8,9] [1,2,3,4,5,6] 
 
             if (Al <= Br && Bl <= Ar) {
                 if (tot % 2 == 1) return Math.min(Ar,Br);

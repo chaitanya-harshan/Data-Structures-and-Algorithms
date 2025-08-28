@@ -8,7 +8,7 @@ public class _08_search_rotated_duplicates {
             int m = l+h >> 1;
             if (nums[m] == target) return true;
             
-            // if only l == m but m != h, we can know that the target if it exists, must be in the right half
+            // if only l == m && m != h, we can know that the target if it exists, must be in the right half
             // but we already have a check for that => if [target < l] 
             if (nums[l] == nums[m] && nums[m] == nums[h]) {
                 l++;

@@ -24,17 +24,16 @@ public class _11_painters_partion {
 
     static int countPainters(ArrayList<Integer> boards, int time) {
         // time <----> area
-        int painters = 1;
-        int painted = boards.get(0);
-        for (int i = 1; i < boards.size(); i++) {
-            if (boards.get(i) + painted <= time) {
-                painted += boards.get(i);
-            }
-            else {
+        int painters = 0;
+        int boardsPainted = 0;
+        for (int i = 0; i < boards.size(); i++) {
+            boardsPainted += boards.get(i);
+            if (boardsPainted > time) {
                 painters++;
-                painted = boards.get(i);
+                boardsPainted = boards.get(i);
             }
         }
+        painters++;
         return painters;
     }
 }
@@ -45,7 +44,7 @@ https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
  * Given an array/list of length ‘n’, where the array/list represents the boards
  *  and each element of the given array/list represents the length of each board. 
  * Some ‘k’ numbers of painters are available to paint these boards. Consider that 
- * each unit of a board takes 1 unit of time to paint.
+ * each 'unit' of a board takes '1 unit' of time to paint.
  You are supposed to return the area of the minimum time to get this job done of painting 
  all the ‘n’ boards under a constraint that any painter will only paint the continuous 
  sections of boards.

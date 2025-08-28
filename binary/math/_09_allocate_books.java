@@ -29,26 +29,41 @@ public class _09_allocate_books {
     }
     
     static int countStudents(ArrayList<Integer> books, int capacity) {
-        // *** DON'T CHANGE *** you've already tried and realized you can't
-        int count = 1; // counts the last (partial) student
-        int pages = books.get(0);
+        int count = 0;
+        int pages = 0;
         
-        // books[0] won't be > capacity b/c low = max(books)
-        for (int i=1; i<books.size(); i++) {
-            if (pages + books.get(i) > capacity) {
+        for (int i=0; i<books.size(); i++) {
+            pages += books.get(i);
+            if (pages > capacity) {
                 count++;
                 pages = books.get(i);
             }
-            else pages += books.get(i);
         }
+        count++;
         return count;
     }
-
     //                            |
     //                            V
     // student:    high ---> m-1..m..m..m+1 ---> low
     // capacity:   low ----> cn..cn+1..cn+2... --->  High
     // we need lower capacity
+
+    
+    // static int countStudents(ArrayList<Integer> books, int capacity) {
+    //     int count = 1; // counts the last (partial) student
+    //     int pages = books.get(0);
+        
+    //     // books[0] won't be > capacity b/c low = max(books)
+    //     for (int i=1; i<books.size(); i++) {
+    //         if (pages + books.get(i) > capacity) {
+    //             count++;
+    //             pages = books.get(i);
+    //         }
+    //         else pages += books.get(i);
+    //     }
+    //     return count;
+    // }
+
 }
     /*
     https://www.naukri.com/code360/problems/allocate-books_1090540

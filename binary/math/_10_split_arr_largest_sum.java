@@ -18,16 +18,15 @@ public class _10_split_arr_largest_sum {
     }
 
     static int subArrays(int[] nums, int limit) {
-        int count = 1, sum = nums[0];
-        for(int i = 1;i<nums.length; i++){
-            if (sum + nums[i] <= limit) {
-                sum += nums[i];
-            }
-            else {
+        int count = 0, sum = 0;
+        for(int i = 0;i<nums.length; i++){
+            sum += nums[i];
+            if (sum > limit) {
                 count++;
                 sum = nums[i];
             }
         }
+        count++;
         return count;
     }
 }

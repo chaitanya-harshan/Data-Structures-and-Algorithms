@@ -64,14 +64,18 @@ public class _14_Kth_element_combined_sorted_arrays {
         Correction: In this case, Br should be Integer.MIN_VALUE to correctly signal that m is too large.
      */
 
-    // Similar but some low, high calculation is different
+    // Similar but low, high calculation is different
     public static int kthElement1( int a[], int b[], int k) {
         if (a.length > b.length) {int[] temp = a; a = b; b = temp;}
         int n1 = a.length, n2 = b.length;
 
         int kth = k-1; // we need to pivot/split k-1 elements to be in the left part
         // then the 1st element of the right part is the answer.
-        int l = Math.max(-1, kth - n2-1), h = Math.min(kth-1, n1-1);
+        int l = Math.max(-1, kth - n2-1); // Explantion: if we take '0' elements from a[], then we need to take 'k-1' elements from b[]
+        // Explantion for (kth -n2-1): if we take 'n2' elements from b[], then we need to take 'k-1-n2' elements from a[]
+        // if (kth - n2-1 < -1) l = -1: this case is when k-1 < n2, i.e., we can take all k-1 elements from b[] only
+        // if (kth - n2-1 >= -1) l = kth - n2-1: this case is when k-1 >= n2, i.e., we must take at least (k-1-n2) elements from a[]
+        int h = Math.min(kth-1, n1-1);
         while (l <= h) {
             int m = l+h >> 1;
             int bil = kth - m - 2;

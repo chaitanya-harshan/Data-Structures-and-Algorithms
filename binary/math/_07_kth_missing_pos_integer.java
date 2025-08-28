@@ -13,7 +13,10 @@ public class _07_kth_missing_pos_integer {
             else high = mid - 1;
         }
         // 🚨🚨🚨 
-        // Δ = [h]-(h+1) 
+        // **** h+1 -> what the value would be if the array had no missing numbers (which would be h+1 for a 1-based sequence).
+        // **** [h] -> what the value actually is at index h in the given array.
+        // **** Δ = [h]-(h+1) -> the difference between what the value is and what it would be if there were no missing numbers.
+        // Δ = [h]-(h+1)   
         // res = [h] + (k-Δ)
 
         // [h] + k - Δ
