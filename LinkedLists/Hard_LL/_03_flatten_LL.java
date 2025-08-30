@@ -1,4 +1,6 @@
 /*
+https://www.naukri.com/code360/problems/flatten-a-linked-list_1112655
+
  * You are given a linked list containing 'n' 'head' nodes, where every node in the linked list contains two pointers:
 
 (1) ‘next’ which points to the next node in the list
@@ -7,7 +9,13 @@
 Each of these child linked lists is in sorted order and connected by 'child' pointer.
 
 Your task is to flatten this linked such that all nodes appear in a single layer or level in a 'sorted order'.
- */
+Constraints:
+1 <= n <= 100
+1 <= k <= 20
+1 <= Node.data <= 10^9
+
+Time Limit: 1 sec
+*/
 
  
 //    head -> [3] -> [2] -> [1] -> [4] -> [5] -> NULL
