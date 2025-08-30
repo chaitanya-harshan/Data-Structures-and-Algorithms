@@ -1,14 +1,25 @@
 /*
- * You are given a sorted doubly linked list of size 'n', consisting of distinct positive integers, and a number 'k'.
- * 
-Find out all the pairs in the doubly linked list with sum equal to 'k'.
+https://takeuforward.org/plus/dsa/problems/find-pairs-with-given-sum-in-doubly-linked-list
+
+https://www.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1
+
+ * Given the head of a sorted doubly linked list of positive distinct integers, and a target integer, 
+ * return a 2D array containing all unique pairs of nodes (a, b) such that a + b == target.
+Each pair should be returned as a 2-element array [a, b] with a < b. The list is sorted in 
+ascending order. If there are no such pairs, return an empty list.
 
 Example :
 Input: Linked List: 1 <-> 2 <-> 3 <-> 4 <-> 9 and 'k' = 5
-
 Output: (1, 4) and (2, 3)
-
 Explanation: There are 2 pairs in the linked list having sum 'k' = 5.
+
+Input: head = [1, 2, 4, 5, 6, 8, 9], target = 7
+Output: [[1, 6], [2, 5]]
+Explanation: 1 + 6 = 7 and 2 + 5 = 7 are the valid pairs.
+
+Input: head = [1, 5, 6], target = 6
+Output: [[1, 5]]
+Explanation: 1 + 5 = 6 is the only valid pair.
  */
 package medium_DLL;
 import _2D.*;
@@ -34,9 +45,6 @@ public class _02_pairs_with_sum_k_in_DLL {
             int sum = left.data + right.data;
             
             if (target == sum) {
-                // ArrayList<Integer> pair = new ArrayList<>();
-                // pair.add(left.data);
-                // pair.add(right.data);
                 ArrayList<Integer> pair = new ArrayList<>(Arrays.asList(left.data, right.data));
                 table.add(pair);
                 left = left.next;

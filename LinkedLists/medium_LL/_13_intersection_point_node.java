@@ -16,6 +16,7 @@ public class _13_intersection_point_node {
     // Crazy ass logic but sweet & simple
     // making them pass through each LL so to equalize the distance traversed by each 
     // so now they have to be equal
+    // 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
 
@@ -29,6 +30,7 @@ public class _13_intersection_point_node {
         return t1; // this is for - if both are null (diff LL but same length) or both pointing to the same LL 
         // node 1 will the colloding point
     }
+
 }
 
 /*

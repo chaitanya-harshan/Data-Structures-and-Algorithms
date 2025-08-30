@@ -1,4 +1,6 @@
 /*
+https://www.naukri.com/code360/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461
+
  * You’re given a doubly-linked list and a key 'k'.
 Delete all the nodes having data equal to ‘k’.
 
@@ -16,14 +18,17 @@ public class _01_delete_all_nodes_with_value_k {
         // if (head == null) return null; // not needed as a dummy (-1) is created and loop check for null
 
         Node dummy = new Node(-1, head, null);
-        Node temp = dummy;
-        while (temp.next != null) {
-            if (temp.next.data == k) {
-                temp.next = temp.next.next;
-                if (temp.next != null) temp.next.prev = temp;
+        Node prev = dummy;
+        Node cur = head;
+        while (cur != null) {
+            if (cur.data != k) {
+                prev.next = cur;
+                cur.prev = prev;
+                prev = cur;
             }
-            else temp = temp.next;
+            cur = cur.next;
         }
+        prev.next = null; // IMPORTANT
         return dummy.next;
     }
 }
