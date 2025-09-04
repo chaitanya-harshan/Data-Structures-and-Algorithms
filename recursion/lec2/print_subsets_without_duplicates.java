@@ -51,6 +51,12 @@ public class print_subsets_without_duplicates {
 
 
     // i'm not sure how this is working since .contains cheks by reference and not direct eqality
+    // Found the asnwer for above:
+    // If the list object reference in the 2D list is the same, but its elements have changed, contains 
+    // will return true only if the elements are exactly equal at the time of comparison; otherwise, it returns false.
+    // ------------ But the list object is same for all the recursive methods ---------------
+    // so the obj reference is the same so now it checks for the elements
+
     static void backtrack1(List<List<Integer>> list, List<Integer> arr, int k, int[] nums) {
         if (k == nums.length) {
             if (!list.contains(arr)) list.add(new ArrayList<>(arr));

@@ -1,17 +1,4 @@
-/*
- * 78. Subsets
-Given an integer array nums of unique elements, return all possible 
-subsets
- (the power set).
 
-The solution set must not contain duplicate subsets. Return the solution in any order.
-
-Input: nums = [1,2,3]
-Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
-
-Input: nums = [0]
-Output: [[],[0]]
- */
 package recursion.lec2;
 
 import java.util.ArrayList;
@@ -58,4 +45,54 @@ public class _03_print_subsets_of__num_array {
         generate(list, arr, k+1, nums);
         arr.removeLast(); // to get the original arr which u can return (backtrack) upwards in the tree struture
     }  
+}
+
+/*
+ * URL: https://leetcode.com/problems/subsets/description/
+
+78. Subsets
+
+Given an integer array nums of unique elements, return all possible  (the power set).
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+ 
+Example 1:
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+Example 2:
+Input: nums = [0]
+Output: [[],[0]]
+
+ 
+Constraints:
+
+	1 <= nums.length <= 10
+	-10 <= nums[i] <= 10
+	All the numbers of nums are unique.
+ */
+
+
+// __________new clean code_____________
+
+ class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    int[] nums;
+
+    public List<List<Integer>> subsets(int[] nums) {
+        this.nums = nums;
+        generateSubsets(0, new ArrayList<>());
+        return res;
+    }
+
+    public void generateSubsets(int i, ArrayList<Integer> list) {
+        if (i == nums.length) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+
+        generateSubsets(i + 1, list);
+        list.add(nums[i]);
+        generateSubsets(i + 1, list);
+        list.removeLast();
+    }
 }

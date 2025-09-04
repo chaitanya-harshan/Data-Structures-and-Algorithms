@@ -1,13 +1,3 @@
-/*
- * 22. Generate Parentheses
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
-
-Input: n = 3
-Output: ["((()))","(()())","(())()","()(())","()()()"]
-
-Input: n = 1
-Output: ["()"]
- */
 
 package recursion.lec2;
 
@@ -36,3 +26,24 @@ public class _02_generate_paranthesis {
         if (close < n && close < open) generate(list, str+')', open, close+1, n);
     }
 }
+
+/*
+ * URL: https://leetcode.com/problems/generate-parentheses/description/
+
+22. Generate Parentheses
+
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+ 
+Example 1:
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+Input: n = 1
+Output: ["()"]
+
+ 
+Constraints:
+
+	1 <= n <= 8
+ */

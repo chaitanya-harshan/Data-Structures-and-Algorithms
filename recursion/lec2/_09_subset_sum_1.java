@@ -1,12 +1,25 @@
 /*
- * Given a list arr of n integers, return sums of all subsets in it. Output sums can be printed in any order.
+You are given an array 'nums' of ‘n’ integers.
+Return all subset sums of 'nums' in a non-decreasing order.
 
-Input:
-n = 2    arr[] = {2, 3}
-Output: 0 2 3 5
+Note:
+Here subset sum means sum of all elements of a subset of 'nums'. A subset of 'nums' is an array formed by removing some (possibly zero or all) elements of 'nums'.
+
+For example
+Input: 'nums' = [1,2]
+
+Output: 0 1 2 3
+
+Explanation:
+Following are the subset sums:
+0 (by considering empty subset)
+1 
+2
+1+2 = 3
+So, subset sum are [0,1,2,3].
 
 https://practice.geeksforgeeks.org/problems/subset-sums2234/1
-
+https://www.naukri.com/code360/problems/subset-sum_3843086
  */
 package recursion.lec2;
 

@@ -30,49 +30,42 @@ https://youtu.be/GBKI9VSKdGg - neetcode
 package recursion.lec2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class _07_combination_sum {
+    // ***************** Take & stay || No-take & go-next ********************
 
-    public static void main(String[] args) {
-        int[] nums = {2,3,6,7};
-        List<List<Integer>> list = combinationSum(nums, 7);
-        System.out.println(list);
-    }
+    List<List<Integer>> res = new ArrayList<>();
+    int[] candidates;
+    int target;
 
-    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(res, new ArrayList<>(), candidates, 0, target);
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        this.candidates = candidates;
+        this.target = target;
+        backtrack(0, 0, new ArrayList<>());
         return res;
     }
 
-    static void backtrack(List<List<Integer>> res, List<Integer> list, int[] candidates, int k, int target) {
-        if (target == 0) {
+    public void backtrack(int i, int sum, ArrayList<Integer> list) {
+        if (i == candidates.length) return;
+        if (sum == target) {
             res.add(new ArrayList<>(list));
             return;
         }
-        if (k == candidates.length) return;
 
-        // if (target > 0) {
-        //     list.add(candidates[k]);
-        //     backtrack(res, list, candidates, k, target-candidates[k]);
-        //     list.removeLast();
+        // no take & move to next 
+        backtrack(i+1, sum, list);
 
-        //     backtrack(res, list, candidates, k+1, target);
-        // }
-
-        if (candidates[k] <= target) {
-            list.add(candidates[k]);
-            backtrack(res, list, candidates, k, target-candidates[k]);
+        // take and stay
+        if (sum + candidates[i] <= target) {
+            list.add(candidates[i]);
+            backtrack(i, sum+candidates[i], list);
             list.removeLast();
         }
-
-        backtrack(res, list, candidates, k+1, target);
     }
 }
 
-// it's a binary => take it(the current index num) or skip(dont add the curr num) and go to next index
+// it's a binary => take it(the current index num) & stay or skip(dont add the curr num) and go to next index
 /*
                                   abcd
 
@@ -86,3 +79,17 @@ public class _07_combination_sum {
 if by adding nums[i] to sum, sum exceeds target then we return
 */
 
+/*
+                                            2 3 6 7
+                                    /----------------+----------------\
+                                -                                      2
+                        /------------\                          /-----------\
+                       -                2                      2              3
+                     /   \            /   \                  /   \          /   \
+                    -      2         2      3               2      3       3      6
+                   / \    / \       / \    / \             / \    / \     / \    / \
+                  -   2  2   3     2   3  3   6           2   3  3   6   3   6  6   7
+
+Path sum =>       0   2  4   5     6   7  8   11          8   9  10  13  11  14 17  18
+
+ */

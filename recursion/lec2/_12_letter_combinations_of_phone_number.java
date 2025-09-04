@@ -5,9 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class _12_letter_combinations_of_phone_number {
+    HashMap<Character, String> map = new HashMap<>();
+    List<String> result = new ArrayList<>();
+    String digits;
     
-    public static List<String> letterCombinations(String digits) {
-        HashMap<Character, String> map = new HashMap<>();
+    public List<String> letterCombinations(String digits) {
+        if (digits.length() == 0) return result;
+
+        this.digits = digits;
         map.put('2',"abc");
         map.put('3',"def");
         map.put('4',"ghi");
@@ -17,24 +22,25 @@ public class _12_letter_combinations_of_phone_number {
         map.put('8',"tuv");
         map.put('9',"wxyz");
 
-        List<String> result = new ArrayList<>();
-        backtrack(result, "", 0, digits, map);
+        backtrack("", 0);
         return result;
     }
 
-    static void backtrack(List<String> result, String word, int key, String digits, HashMap<Character, String> map) {
+    void backtrack(String word, int key) {
         if (key == digits.length()) {
-            if (!word.isEmpty()) result.add(word);
+            result.add(word);
             return;
         }
 
         for (char c: map.get(digits.charAt(key)).toCharArray()) {
-            backtrack(result, word + c, key+1, digits, map);
+            backtrack(word + c, key+1);
         }
     }
 }
 
 /*
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
  * 17. Letter Combinations of a Phone Number
 Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
 

@@ -4,6 +4,7 @@
 ```java
 ArrayList<Integer> list = new ArrayList<>();
 int[] arr = list.toArray(new int[list.size()]);
+int[] arr = list.toArray(int[]::new); 
 ```
 ___________________________________________________________________________
 ### Convert Array to ArrayList
