@@ -25,6 +25,7 @@ public class _10_merge_Intervals {
         list.add(intervals[i]);
 
         return list.toArray(int[][]::new);
+        // return list.toArray(new int[list.size()][]);
     }
 }
 

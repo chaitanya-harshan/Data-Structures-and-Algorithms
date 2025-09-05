@@ -3,8 +3,32 @@ package greedy.medium;
 import java.util.Arrays;
 
 public class _11_non_overlapping_intervals {
-    
     public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a,b)-> a[0] -b[0]);
+        int prevEnd = intervals[0][1];
+        int cnt = 0;
+
+        for (int i=1; i<intervals.length; i++) {
+            if (intervals[i][0] < prevEnd) {
+                cnt++;
+                prevEnd = Math.min(prevEnd, intervals[i][1]);
+            }
+            else {
+                prevEnd = intervals[i][1];
+            }
+        }
+        return cnt;
+    }
+
+    //     ------------A
+    // --------B          ---------C  -> remove A
+
+    //     -----A
+    // -------------B     ---------C  -> remove B
+
+
+    // I don't understand this approach
+    public int eraseOverlapIntervals1(int[][] intervals) {
         int n = intervals.length;
         Arrays.sort(intervals, (a,b)->a[1]-b[1]);
 
