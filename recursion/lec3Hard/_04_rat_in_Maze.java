@@ -1,70 +1,78 @@
 package recursion.lec3Hard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class _04_rat_in_Maze {
 
-    public static ArrayList<String> findPath(int[][] mat) {
-        // Your code here
-        if (mat[0][0] == 0) return new ArrayList<>();
+    // DLRU
+    int[][] maze;
+    boolean[][] available;
+    ArrayList<String> res = new ArrayList<>();
+    int m,n;
+    
+    public ArrayList<String> ratInMaze(int[][] maze) {
+        int m = maze.length, n = maze[0].length;
+        this.maze = maze;
+        this.available = new boolean[m][n];
+        this.m = m;
+        this.n = n;
         
-        int n = mat.length;
-        ArrayList<String> paths = new ArrayList<>();
-        int[][] visited = new int[n][n];
-        for (int[] row: visited) {
-            Arrays.fill(row, 0);
-        }
-        visited[0][0] = 1;
-        
-        findPath(0,0, visited, mat, paths, "", n);
-        return paths;
+        dfs(0,0,"");
+        return res;
     }
     
-    static void findPath(int row, int col, int[][] visited, int[][] mat, List<String> paths, String path, int n) {
-        if (row == n - 1 && col == n - 1) {
-            paths.add(path);
+    void dfs(int r, int c, String path) {
+        if (r<0 || r>=m || c<0 || c>=n) return;
+        if (r == m-1 && c == n-1) {
+            res.add(new String(path));
             return;
         }
+        if (maze[r][c] == 0) return;
+        if (available[r][c]) return;
         
-        char[] directions = {'U','D','L','R'};
-        int[] rC = {-1,1,0,0}; // how much rowChange
-        int[] cC = {0,0,-1,1}; // how much colChange
-        
-        for (int i=0; i<4; i++) {
-            int rowNxt = row + rC[i];
-            int colNxt = col + cC[i];
-
-            if (isValid(directions[i], rowNxt, colNxt, visited, mat, n)) {
-                visited[rowNxt][colNxt] = 1;
-                findPath(rowNxt, colNxt, visited, mat, paths, path+directions[i], n);
-                visited[rowNxt][colNxt] = 0;
-            }
-        }
-    }
-    
-    static boolean isValid(char direction, int row, int col, int[][] visited, int[][] mat, int n) {
-        if (row < 0 || row > n-1 || col < 0 || col > n-1) return false;
-        if (mat[row][col] == 0) return false;
-        if (visited[row][col] == 1) return false;
-        return true;
+        available[r][c] = true;
+        dfs(r+1,c,path+'D');
+        dfs(r,c-1,path+'L');
+        dfs(r,c+1,path+'R');
+        dfs(r-1,c,path+'U');
+        available[r][c] = false;
     }
 }
 
 /*
-
 https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
 https://youtu.be/bLGZhJlt4y0
 
 Rat in a Maze Problem - I
+Consider a rat placed at position (0, 0) in an n x n square matrix mat[][]. The rat's goal is to reach the destination at position (n-1, n-1). The rat can move in four possible directions: 'U'(up), 'D'(down), 'L' (left), 'R' (right).
 
- * Consider a rat placed at (0, 0) in a square matrix mat of order n* n. 
- * It has to reach the destination at (n - 1, n - 1). 
- * Find all possible paths that the rat can take to reach from source to destination. 
- * The directions in which the rat can move are 'U'(up), 'D'(down), 'L' (left), 'R' (right).
- *  Value 0 at a cell in the matrix represents that it is blocked and rat cannot move to it while value 1 at a cell in the matrix represents that rat can be travel through it.
-Note: In a path, no cell can be visited more than one time. I
-f the source cell is 0, the rat cannot move to any other cell. 
-In case of no path, return an empty list. The driver will output "-1" automatically.
+The matrix contains only two possible values:
+
+0: A blocked cell through which the rat cannot travel.
+1: A free cell that the rat can pass through.
+Your task is to find all possible paths the rat can take to reach the destination, starting from (0, 0) and ending at (n-1, n-1), under the condition that the rat cannot revisit any cell along the same path. Furthermore, the rat can only move to adjacent cells that are within the bounds of the matrix and not blocked.
+If no path exists, return an empty list.
+
+Note: Return the final result vector in lexicographically smallest order.
+
+Examples:
+
+Input: mat[][] = [[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
+Output: ["DDRDRR", "DRDDRR"]
+Explanation: The rat can reach the destination at (3, 3) from (0, 0) by two paths - DRDDRR and DDRDRR, when printed in sorted order we get DDRDRR DRDDRR.
+Input: mat[][] = [[1, 0], [1, 0]]
+Output: []
+Explanation: No path exists as the destination cell is blocked.
+Input: mat = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
+Output: ["DDRR", "RRDD"]
+Explanation: The rat has two possible paths to reach the destination: 1. "DDRR" 2. "RRDD", These are returned in lexicographically sorted order.
+
+
+Constraints:
+2 ≤ mat.size() ≤ 5
+0 ≤ mat[i][j] ≤ 1
+
+Expected Complexities
+Time Complexity: O(4 ^ (n * n))
+Auxiliary Space: O(n * n)
  */

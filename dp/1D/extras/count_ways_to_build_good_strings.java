@@ -3,25 +3,38 @@ package extras;
 public class count_ways_to_build_good_strings {
     
     public int countGoodStrings(int low, int high, int zero, int one) {
-        long MOD = 1_000_000_000 + 7;
-        long[] dp = new long[high+1];
+        int MOD = 1_000_000_007;
+
+        // dp[i] will store the number of ways to construct a string of length i.
+        int[] dp = new int[high + 1];
+        // Base case: There is one way to form an empty string (the string of length 0).
         dp[0] = 1;
-        long goodStrings = 0;
 
+        int goodStringsCount = 0;
+
+        // Iterate from length 1 up to the maximum possible length, high.
         for (int i = 1; i <= high; i++) {
-            if (i-zero >= 0) dp[i] = (dp[i] + dp[i-zero]) % MOD;
-            if (i-one >= 0) dp[i] = (dp[i] + dp[i-one]) % MOD;
+            // A string of length 'i' can be formed by two ways:
+            // 1. Appending a '*0*' string (length `zero`) to a previous string of length `i - zero`.
+            if (i >= zero) {
+                dp[i] = (0 + dp[i - zero]) % MOD;
+                // ~ dp[i] = (d[i] + dp[i - zero]) % MOD; ----- as dp initial value is zero so using 0 is fine
+            }
 
-            // Hvaing to not check everytime for i >= low reduces time complexity by 1ms
-            // if (i >= low) goodStrings = (goodStrings + dp[i]) % MOD;
+            // 2. Appending a '*1*' string (length `one`) to a previous string of length `i - one`.
+            if (i >= one) {
+                dp[i] = (dp[i] + dp[i - one]) % MOD; 
+                // can't use o here for dp[i] cause you have to add to it not replace
+            }
+
+            // If the current length 'i' is within the [low, high] range,
+            if (i >= low) {
+                goodStringsCount = (goodStringsCount + dp[i]) % MOD;
+            }
         }
 
-        for (int i = low; i <= high; i++) {
-            goodStrings = (goodStrings + dp[i]) % MOD;
-        }
-        return (int)goodStrings;
+        return goodStringsCount;
     }
-}
 
 /*
  * 2466. Count Ways To Build Good Strings

@@ -1,28 +1,26 @@
+import java.util.Arrays;
+
 public class _06_min_falling_path_sum {
     
     public int minFallingPathSum(int[][] matrix) {
-        int n = matrix.length;
-        int[] prev = new int[n+2];
+        int m = matrix.length, n = matrix[0].length;
+        int[] prev = new int[n];
 
-        for (int i = n-1; i>=0; i--) {
-            int[] row = new int[n+2];
-            row[0] = Integer.MAX_VALUE;
-            row[n+1] = Integer.MAX_VALUE;
-
-            for (int j=1; j< n+1; j++) {
-                int leftDiag = prev[j-1];
-                int down = prev[j];
-                int rightDiag = prev[j+1];
-
-                row[j] = matrix[i][j-1] + Math.min(leftDiag, Math.min(down, rightDiag));
+        for (int i=m-1; i>=0; i--) {
+            int[] dp = new int[n];
+            for (int j=0; j<n; j++) {
+                
+                dp[j] = prev[j]; // default non zero vlaue
+                for (int k=-1; k<2; k++) {
+                    if (j+k < 0 || j+k > n-1) continue;
+                    dp[j] = Math.min(dp[j], prev[j+k]);
+                }
+                dp[j] += matrix[i][j];
             }
-            prev = row;
+            prev = dp;
         }
-        int result = Integer.MAX_VALUE;
-        for (int i=0; i<n; i++) {
-            result = Math.min(result, prev[1+i]);
-        }
-        return result;
+
+        return Arrays.stream(prev).min().getAsInt();
     }
 }
 

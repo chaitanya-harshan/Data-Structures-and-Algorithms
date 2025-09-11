@@ -4,34 +4,33 @@ package recursion.lec3Hard;
  * _06_suduko
  */
 public class _07_suduko {
+    char[][] board;
 
     public void solveSudoku(char[][] board) {
-        solve(board, 0,0);
+        this.board = board;
+        solve(0,0);
     }
 
-    static boolean solve(char[][] board, int row_start,int col_start) {
-        // iterating though the board to find the empty cells
-        for (int i=row_start; i<board.length; i++) {
-            for (int j=col_start; j<board.length; j++) {
+    boolean solve(int r,int c) {
+        if (r == 9) return true;
 
-                if (board[i][j] == '.') {// upon finding the empty cell
+        int nextRow = c == 8 ? r+1 : r;
+        int nextCol = c == 8 ? 0 : c+1;
 
-                    for (char c='1'; c<='9'; c++) {
-                        if (isValid(c, i, j, board)) {
-                            board[i][j] = c; // putting the num in the cell
-                            // ** i fucking dont know why it always have to start from 0 for new func call**
-                            if (solve(board, 0, 0)) return true; // calling recursion for to solve next empty space
-                            else board[i][j] = '.';
-                        }
-                    }
-                    return false;
+        if (board[r][c] == '.') {
+            for (char ch='1'; ch<='9'; ch++) {
+                if (isValid(ch, r, c)) {
+                    board[r][c] = ch;
+                    if (solve(nextRow, nextCol)) return true;
+                    board[r][c] = '.';
                 }
             }
+            return false;
         }
-        return true;// for ending recursion call where all the spaces are filled so it just needs to return true 
+        else return solve(nextRow, nextCol); 
     }
 
-    static boolean isValid(char c, int row, int col, char[][] board) {
+    boolean isValid(char c, int row, int col) {
         for (int i=0; i<board.length; i++) {
             if (board[i][col] == c) return false;
             if (board[row][i] == c) return false;
@@ -64,6 +63,7 @@ Input: board =
 [. 6 .    . . .    2 8 .] 
 [. . .    4 1 9    . . 5] 
 [. . .    . 8 .    . 7 9]]
+
 Output: 
 [[5 3 4    6 7 8    9 1 2] 
 [6 7 2    1 9 5    3 4 8] 

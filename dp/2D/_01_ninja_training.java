@@ -2,29 +2,28 @@ package dp.2D;
 
 public class _01_ninja_training {
 
-    public int maximumPoints(int arr[][], int N) {
-        // code here
-        int dp[][] = new int[N+1][3];
-        // dp[N-1] = {arr[N-1][0], arr[N-1][1], arr[N-1][2] };
-        
-        for (int i=N+1-2; i>=0; i--) {
-            for (int j=0; j<3; j++) {
-                
-                int cur = 0;
-                for (int k=0; k<3; k++) {
-                    if (k != j) {
-                        cur = Math.max(arr[i][j]+dp[i+1][k], cur);
-                    }
+    public static int ninjaTraining(int n, int points[][]) {
+        int[] dp = new int[3];
+
+        for (int i = n-1; i >= 0; i--) {
+            int[] newDP = new int[3];
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    if (j == k) continue;
+                    newDP[j] = Math.max(newDP[j], dp[k]);
                 }
-                dp[i][j] = cur;
+                newDP[j] += points[i][j];
             }
+            dp = newDP;
         }
-        
-        return Math.max(dp[0][0], Math.max(dp[0][1], dp[0][2]));
+
+        return Math.max(dp[0], Math.max(dp[1], dp[2]));
     }
 }
 
 /*
+https://www.naukri.com/code360/problems/ninja-s-training_3621003
+
  * A Ninja has an ‘N’ Day training schedule. 
  * He has to perform one of these three activities (Running, Fighting Practice, or Learning New Moves) 
  * each day. There are merit points associated with performing an activity each day. 

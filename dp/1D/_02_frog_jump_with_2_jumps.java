@@ -22,17 +22,16 @@ public class _02_frog_jump_with_2_jumps {
 
     // Coding Ninjas    https://www.naukri.com/code360/problems/frog-jump_3621012?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=SUBMISSION
     public static int frogJump(int n, int heights[]) {
-        int nxxt = 0;
-        int nxt = 0;
+        int nxt = Math.abs(heights[n-1]-heights[n-2]);
+        int nNxt = 0;
         int energy = 0;
-        int one, two = Integer.MAX_VALUE;
-
-        for (int i=n-2; i>=0; i--) {
-            one = Math.abs(heights[i+1] - heights[i]) + nxt;
-            if (i+2 < n) two = Math.abs(heights[i+2] - heights[i]) + nxxt;
+    
+        for (int i=n-3; i>=0; i--) {
+            int one = Math.abs(heights[i+1] - heights[i]) + nxt;
+            int two = Math.abs(heights[i+2] - heights[i]) + nNxt;
             energy = Math.min(one, two);
             
-            nxxt = nxt;
+            nNxt = nxt;
             nxt =  energy;
         }
         return energy;
@@ -44,7 +43,9 @@ public class _02_frog_jump_with_2_jumps {
      * If the Frog is on 'ith' staircase, he can jump either to '(i+1)th' stair or to '(i+2)th' stair. 
      * Your task is to find the minimum total energy used by the frog to reach from '1st' stair to 'Nth' stair.
       For Example
-      If the given ‘HEIGHT’ array is [10,20,30,10], the answer 20 as the frog can jump from 1st stair to 2nd stair (|20-10| = 10 energy lost) and then a jump from 2nd stair to last stair (|10-20| = 10 energy lost). So, the total energy lost is 20.
+      If the given ‘HEIGHT’ array is [10,20,30,10], the answer 20 as the frog can jump from 
+      1st stair to 2nd stair (|20-10| = 10 energy lost) and then a jump from 2nd stair to last stair 
+      (|10-20| = 10 energy lost). So, the total energy lost is 20.
      */
 }
 

@@ -3,7 +3,7 @@ package recursion.lec3Hard;
 import java.util.Arrays;
 import java.util.List;
 
-public class _08_word_break {
+public class _05_word_break_dp {
     public static void main(String[] args) {
         // this is too big of a number to be solved by recurson. we need to use dp
         // since there is a b in the end the it'll check for all the iteratons hence the big number but if there is no b at the end then it'll solve easily

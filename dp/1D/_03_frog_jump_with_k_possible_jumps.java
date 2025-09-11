@@ -4,11 +4,11 @@ public class _03_frog_jump_with_k_possible_jumps {
     // Coding ninjas - https://www.naukri.com/code360/problems/minimal-cost_8180930?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
     public static int minimizeCost(int n, int k, int []height){
         int[] dp = new int[n];
-        dp[n-1] = 0;
+        // dp[n-1] = 0;
 
         for (int i=n-2; i>=0; i--) {
             int energy = Integer.MAX_VALUE;
-            for (int j=i+1;  j<=i+k && j<n;  j++) {
+            for (int j=i+1;  j <= i+k && j<n;  j++) {
                 int jump = Math.abs(height[i] - height[j]) + dp[j];
                 energy = Math.min(energy, jump);
             }

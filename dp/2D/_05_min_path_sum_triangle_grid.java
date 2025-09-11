@@ -4,7 +4,8 @@ import java.util.List;
 public class _05_min_path_sum_triangle_grid {
     
     public int minimumTotal(List<List<Integer>> triangle) {
-        List<Integer> prev = new ArrayList<>(triangle.getLast());
+        List<Integer> prev = triangle.getLast();
+        // If you're wondering, shouldn't we have a zero array list? You need to understand that when the triangle has a height of 1, it means there is only one element. So you could just return the first element.
 
         for (int i=triangle.size()-2; i>=0; i--) {
             List<Integer> row = new ArrayList<>();

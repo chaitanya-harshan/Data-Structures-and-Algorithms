@@ -4,15 +4,19 @@ public class _05_house_robber_II {
     public int rob(int[] nums) {
         int n = nums.length;
         if (n == 1) return nums[0];
-        return Math.max(robbing(nums,n-1,1), robbing(nums, n-2,0));
+        return Math.max(robbing(nums, 0, n-2), robbing(nums, 1, n-1)); 
     }
 
-    static int robbing(int[] nums, int start, int end) {
-        int nxt = 0, nxtNxt = 0;
+    int robbing(int[] nums, int start, int end) {
+        int nxt = 0, nNxt = 0;
         int cur = 0;
-        for (int i=start; i>= end; i--) {
-            cur = Math.max(nums[i]+nxtNxt, nxt);
-            nxtNxt = nxt;
+
+        for (int i=end; i>=start; i--) {
+            int noSkip = nums[i] + nNxt;
+            int skip = nxt;
+            cur = Math.max(noSkip, skip);
+
+            nNxt = nxt;
             nxt = cur;
         }
         return cur;

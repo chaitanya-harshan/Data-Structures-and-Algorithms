@@ -1,31 +1,38 @@
+
 /**
  * _04_house_robber_I
  */
 public class _04_house_robber_I {
 
     public int rob(int[] nums) {
-        int nxt = 0, nxtNxt = 0;
+        int n = nums.length;
+        int nxt = 0, nNxt = 0;
         int cur = 0;
-        for (int i=nums.length-1; i>=0; i--) {
-            cur = Math.max(nums[i]+nxtNxt, nxt);
-            nxtNxt = nxt;
+
+        for (int i = n - 1; i >= 0; i--) {
+            int noSkip = nums[i] + nNxt;
+            int skip = nxt;
+            cur = Math.max(skip, noSkip);
+
+            nNxt = nxt;
             nxt = cur;
         }
+
         return cur;
-
-
-        // if (nums.length == 1) return nums[0];
-        // if (nums.length == 2) return Math.max(nums[0], nums[1]);
-        // int prev = nums[0];
-        // int current = Math.max(prev, nums[1]);
-        // int prev = 0, current = 0;
-        // for (int i = 0; i<nums.length; i++) {
-        //     int temp = current;
-        //     current = Math.max(nums[i] + prev, temp);
-        //     prev = temp;
-        // }
-        // return current;
     }
+
+    // if (nums.length == 1) return nums[0];
+    // if (nums.length == 2) return Math.max(nums[0], nums[1]);
+    // int prev = nums[0];
+    // int current = Math.max(prev, nums[1]);
+    // int prev = 0, current = 0;
+    // for (int i = 0; i<nums.length; i++) {
+    //     int temp = current;
+    //     current = Math.max(nums[i] + prev, temp);
+    //     prev = temp;
+    // }
+    // return current;
+}
 }
 
 /*

@@ -7,48 +7,49 @@ public class _07_3d_dp_two_friends_collect_chocolates {
         System.out.println(solve(4, 3, grid));
         System.out.println(maximumChocolates(4, 3, grid));
     }
-
+    
     // Here MEMOIZATION is better than TABULATION becasue u dont need to calculate all sub problems
+    // https://www.geeksforgeeks.org/problems/chocolates-pickup/1 - gfg
 
     // tabulation  (below there is code for memoization)
-    public static int solve(int m, int n, int[][] grid) {
-        int[][] dp = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == j) dp[i][j] = grid[m-1][i];
-                else dp[i][j] = grid[m-1][i] + grid[m-1][j];
+    public static int solve(int n, int m, int grid[][]) {
+        int[][] prev = new int[m][m];
+        
+        for (int i=0; i<m; i++) {
+            for(int j=0; j<m; j++) {
+                if (i==j) prev[i][j] = grid[n-1][i];
+                else prev[i][j] = grid[n-1][i] + grid[n-1][j];
             }
         }
-        for (int i = m-2; i >= 0; i--) {
-
-            int[][] dpNew = new int[n][n];
-            for (int j1 = 0; j1 < n; j1++) {
-                for (int j2 = 0; j2 < n; j2++) {
+        
+        for (int i=n-2; i>=0; i--) {
+            int[][] dp = new int[m][m];
+            
+            for (int m1 = 0; m1 < m; m1++) {
+                for (int m2 = 0; m2 < m; m2++) {
+                    int max = 0;
                     
-                    int sum;
-                    if (j1 == j2) sum = grid[i][j1];
-                    else sum = grid[i][j1] + grid[i][j2];
-
-                    int max = Integer.MIN_VALUE;
-                    for (int di = -1; di <= 1; di++) {
-                        for (int dj = -1; dj <= 1; dj++) {
-                            int ans;
-                            if (j1+di < 0 || j2+dj < 0 || j1+di >= n || j2+dj >= n) ans = Integer.MIN_VALUE;
-                            else ans = dp[j1+di][j2+dj];
-                            max = Math.max(ans, max);
+                    for (int j1 = m1-1; j1 <= m1+1; j1++) {
+                        for (int j2 = m2-1; j2 <= m2+1; j2++) {
+                            if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m) continue;
+                            max = Math.max(prev[j1][j2], max);
                         }
                     }
-                    dpNew[j1][j2] = sum + max;    
+                    
+                    dp[m1][m2] += max;
+                    if (m1 == m2) dp[m1][m2] += grid[i][m1];
+                    else dp[m1][m2] += grid[i][m1] + grid[i][m2];
                 }
             }
-            dp = dpNew;
+            
+            prev = dp;
         }
-        return dp[0][n-1]; // becasue they both are at (0,0) & (0,n-1)
+        return prev[0][m-1];
     }
 
-
+// __________________________________________________________________________________________________________________________________________
     // Memoization - easier for this problem
-    // https://bit.ly/3U9k6XT - gfg
+    // https://www.naukri.com/code360/problems/ninja-and-his-friends_3125885
     public static int maximumChocolates(int n, int m, int[][] grid) {
 		// Write your code here.
 		int[][][] dp = new int[n][m][m];
@@ -70,15 +71,13 @@ public class _07_3d_dp_two_friends_collect_chocolates {
 
 		int max = Integer.MIN_VALUE;
 		for (int da = -1; da <= 1; da++) {
-			for (int db = -1; db <= 1; db++) {
-				int ans;
-				if (j1 == j2)
-					 ans = grid[i][j1] + backtrack(i+1, j1+da, j2+db, grid, dp, n, m);
-				else ans = grid[i][j1] + grid[i][j2] + backtrack(i+1, j1+da, j2+db, grid, dp, n, m);
-				
-				max = Math.max(max, ans);
+			for (int db = -1; db <= 1; db++) {				
+				max = Math.max(max, backtrack(i+1, j1+da, j2+db, grid, dp, n, m));
 			}
 		}
+		if (j1 == j2) max += grid[i][j1];
+		else max += grid[i][j1] + grid[i][j2];
+
 		return dp[i][j1][j2] = max;
 	}
 }
