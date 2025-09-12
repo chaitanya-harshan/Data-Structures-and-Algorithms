@@ -2,30 +2,25 @@ package dp.subsequences;
 
 public class _10_unbounded_knapsack_duplicate {
     
-    public static int knapSack(int val[], int weight[], int capacity) {
-        int n = weight.length;
-        int[] prev = new int[capacity+1];
-        // for (int j=0; j<=capacity; j++) {
-        //     prev[j] = (j/weight[n-1])*val[n-1];
-        // }
-        // USE i = n-2 in the below for loop if you're using this code
-        
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+        int[] prev = new int[w+1];
+        prev[0] = 0;
+
         for (int i=n-1; i>=0; i--) {
-            int[] dp = new int[capacity+1];
-            dp[0] = 0;
-            for (int k=0; k<= capacity; k++) {
-                int taken = 0;
-                if (k >= weight[i]) taken = val[i] + dp[k-weight[i]];
-                int notTaken = prev[k];
-                
-                dp[k] = Math.max(taken, notTaken);
+            int[] dp = new int[w+1];
+            int num = weight[i];
+
+            for(int k=0; k<=w; k++) {
+                int noTake = prev[k];
+                int take = (num <= k) ? profit[i] + dp[k-num] : 0;
+                dp[k] = Math.max(noTake, take);
             }
             prev = dp;
         }
-        return prev[capacity];
+        return prev[w];
     }
     
-    
+    // gfg
     // public static int knapSack(int val[], int weight[], int capacity) {
     //     // code here
     //     int n = weight.length;
@@ -50,6 +45,7 @@ public class _10_unbounded_knapsack_duplicate {
 
 /*
  * Knapsack with Duplicate Items
+ * https://www.naukri.com/code360/problems/unbounded-knapsack_1215029
  * https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=knapsack-with-duplicate-items
 
 Given a set of items, each with a weight and a value, represented by the array wt and val respectively. 

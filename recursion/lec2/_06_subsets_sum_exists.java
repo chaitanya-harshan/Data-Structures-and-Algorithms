@@ -16,8 +16,7 @@ public class _06_subsets_sum_exists {
         if (s == sum) return true;
         if (s > sum) return false;
         if (i == n) {
-            if (s == sum) return true;
-            else return false;
+            return s == sum;
         }
         
         s += nums[i];

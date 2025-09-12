@@ -5,29 +5,30 @@ import java.util.HashSet;
 public class _01_is_subset_sum_k {
     
     public static void main(String[] args) {
-        System.out.println(isSubsetSum1(6, new int[]{3,34,4,12,5,2}, 30));
+        System.out.println(subsetSumToK(6, 30, new int[]{3,34,4,12,5,2}));
     }
 
-    public static boolean isSubsetSum1(int n, int arr[], int target){
-        boolean[] prev = new boolean[target+1];
-        prev[0] = true;
-        if (arr[n-1] <= target) prev[arr[n-1]] = true;
-        
-        for (int i=n-2; i>=0; i--) {
-            boolean[] dp = new boolean[target+1];
-            dp[0] = true;
+    public static boolean subsetSumToK(int n, int k, int arr[]){
+        // ******* USE the comments code for consistency with the other problems *********
+        boolean[] prev = new boolean[k+1];
+        // prev[0] = true;
+
+        for (int i=n-1; i>=0; i--) {
+            boolean[] dp = new boolean[k+1];
             int num = arr[i];
-            
-            for (int j=1; j<target+1; j++) {
-                if (num == j || prev[j] == true) 
-                    dp[j] = true;
-                else if (j > num && prev[j-num] == true) // else is required and prev[j-num] checkign is optional
-                    dp[j] = true;
+
+            // for (int j=0; j<=k; j++) {
+            for (int j=1; j<=k; j++) {
+                if (j == num || prev[j]) dp[j] = true;
+                else if (j > num && prev[j-num]) dp[j] = true;
+                // boolean noTake = prev[j];
+                // boolean take = false;
+                // if (num <= j) take = prev[j-num];
+                // dp[j] = noTake || take;
             }
             prev = dp;
         }
-        
-        return prev[target];
+        return prev[k];
     }
 
     // Input: n = 6, arr[] = {3, 34, 4, 12, 5, 2}, sum = 9

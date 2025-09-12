@@ -1,57 +1,35 @@
-/*
-* Given an array arr of size n of non-negative integers and an integer sum, the 
-task is to count all subsets of the given array with a sum equal to a given sum.
-Note: Answer can be very large, so, output answer modulo 109+7.
-
-Examples:
-
-Input: n = 6, arr = [5, 2, 3, 10, 6, 8], sum = 10
-Output: 3
-Explanation: {5, 2, 3}, {2, 8}, {10} are possible subsets.
-
-Input: n = 5, arr = [2, 5, 1, 4, 3], sum = 10
-Output: 3
-Explanation: {2, 1, 4, 3}, {5, 1, 4}, {2, 5, 3} are possible subsets.
-*/
 package dp.subsequences;
 
-import java.util.Arrays;
-
 public class _04_number_of_subsets_sum_k {
-    public static void main(String[] args) {
-        int[] nums = {5,2,3,10,6,8};
-        int sum = 10;
-        // System.out.println(subsetsWithSumK(nums, sum));
-        System.out.println(perfectSum(nums, nums.length, sum));
-        System.out.println(perfectSum(new int[]{1,0}, 2, 1));
-    }
     
-    // --- tabulation---
-    // not working for {1,0} target - 1  (ans is 2 but we get 1)
-    public static int perfectSum(int nums[],int n, int sum)	{ 
-	    int[][] dp = new int[n][sum+1];
-	    dp[n-1][0] = 1;
-	    if (nums[n-1] <= sum) dp[n-1][nums[n-1]] = 1;
+    final static int MOD = (int)(Math.pow(10, 9)+7);
+
+    public static int findWays(int nums[], int sum) {
+        int n = nums.length;
+        int[] prev = new int[sum+1];
+	    prev[0] = 1;
 	    
-	    for (int idx=n-2; idx>=0; idx--) {
+	    for (int i=n-1; i>=0; i--) {
+			int[] dp = new int[sum+1];
+			int num = nums[i];
+
+            // ~ from 0 
+            // if nums has {*,0,*} then there are more ways to make target_sum=0
+			// so we have to calculte for k=0 as well
 	        for (int k=0; k<=sum; k++) {
-	            int notTaken = dp[idx+1][k];
+	            int notTaken = prev[k];
 	            int taken = 0;
-	            if (nums[idx] <= k) {
-	                taken = dp[idx+1][k-nums[idx]];
-	            }
-	            
-	            dp[idx][k] = notTaken + taken;
+	            if (num <= k) taken = prev[k-num];
+	            dp[k] = (notTaken + taken)%MOD;
 	        }
+			prev = dp;
 	    }
-        System.out.println(Arrays.deepToString(dp));
-	    return dp[0][sum];
-	}
+	    return prev[sum];
+    }
 
 
     
     // ********* Recursion **********
-    final static int MOD = (int)(Math.pow(10, 9) + 7);
 
     static int subsetsWithSumK1(int[] nums, int sum) {
         int cnt = backtrack(0, sum, nums, nums.length);
@@ -69,3 +47,76 @@ public class _04_number_of_subsets_sum_k {
         return (left + right) % MOD;
     }
 }
+
+/*
+ *  Count Subsets with Sum K
+https://www.naukri.com/code360/problems/count-subsets-with-sum-k_3952532
+
+Problem statement
+You are given an array 'arr' of size 'n' containing positive integers and a target sum 'k'.
+Find the number of ways of selecting the elements from the array such that the sum of chosen elements is equal to the target 'k'.
+Since the number of ways can be very large, print it modulo 10 ^ 9 + 7.
+
+
+
+Example:
+Input: 'arr' = [1, 1, 4, 5]
+
+Output: 3
+
+Explanation: The possible ways are:
+[1, 4]
+[1, 4]
+[5]
+Hence the output will be 3. Please note that both 1 present in 'arr' are treated differently.
+Detailed explanation ( Input/output format, Notes, Images )
+Sample Input 1 :
+4 5
+1 4 4 5
+
+
+Sample Output 1 :
+ 3
+
+
+Explanation For Sample Output 1:
+The possible ways are:
+[1, 4]
+[1, 4]
+[5]
+Hence the output will be 3. Please note that both 1 present in 'arr' are treated differently.
+
+
+Sample Input 2 :
+3 2
+1 1 1
+
+
+Sample Output 2 :
+3
+
+
+Explanation For Sample Output 1:
+There are three 1 present in the array. Answer is the number of ways to choose any two of them.
+
+
+Sample Input 3 :
+3 40
+2 34 5
+
+
+Sample Output 3 :
+0
+
+
+Expected time complexity :
+The expected time complexity is O('n' * 'k').
+
+
+Constraints:
+1 <= 'n' <= 100
+0 <= 'arr[i]' <= 1000
+1 <= 'k' <= 1000
+
+Time limit: 1 sec
+ */
