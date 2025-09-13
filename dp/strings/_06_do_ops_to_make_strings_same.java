@@ -2,22 +2,24 @@ package dp.strings;
 
 public class _06_do_ops_to_make_strings_same {
     
+    // Find LCS: then do (n - LCS) + (m - LCS)
     public int minDistance(String word1, String word2) {
         int n = word1.length(), m = word2.length();
         int[] prev = new int[m+1];
+        prev[m] = 0; // ~~
 
-        for (int i=1; i<=n; i++) {
+        for (int i=n-1; i>=0; i--) {
             int[] dp = new int[m+1];
+            dp[m] = 0; // ~~
 
-            for (int j=1; j<=m; j++) {
-                if (word1.charAt(i-1) == word2.charAt(j-1)) dp[j] = 1 + prev[j-1];
-                else dp[j] = Math.max(dp[j-1], prev[j]);
+            for (int j=m-1; j>=0; j--) {
+                if (word1.charAt(i) == word2.charAt(j)) dp[j] = 1 + prev[j+1];
+                else dp[j] = Math.max(dp[j+1], prev[j]);
             }
             prev = dp;
         }
 
-        int LCS = prev[m];
-        System.out.println(LCS+" "+n+" "+m);
+        int LCS = prev[0];
         return n-LCS + m-LCS;
     }
 }

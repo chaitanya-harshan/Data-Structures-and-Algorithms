@@ -1,27 +1,25 @@
 package dp.strings;
 
-public class _04_longest_plaindrome_substring {
+public class _04_longest_plaindrome_subsequence {
     
     // just revese rhe string as s2 and do LCS b/w 's' and 's.reverse'
     public int longestPalindromeSubseq(String s) {
         String t = new StringBuilder(s).reverse().toString();
         int n = s.length();
         int[] prev = new int[n+1];
+        prev[n] = 0;
 
-        for (int i=1; i<=n; i++) {
+        for (int i=n-1; i>=0; i--) {
             int[] dp = new int[n+1];
-            dp[0] = 0;//
-            
-            for (int j=1; j<=n; j++) {
-                if (s.charAt(i-1) == t.charAt(j-1)) dp[j] = 1 + prev[j-1];
-                else {
-                    //  left - (i, j-1), right - (i-1, j)
-                    dp[j] = Math.max(dp[j-1], prev[j]);
-                }
+            dp[n]  = 0;
+
+            for (int j=n-1; j>=0; j--) {
+                if (s.charAt(i) == t.charAt(j)) dp[j] = 1 + prev[j+1];
+                else dp[j] = Math.max(dp[j+1], prev[j]);
             }
             prev = dp;
         }
-        return prev[n];
+        return prev[0];
     }
 }
 

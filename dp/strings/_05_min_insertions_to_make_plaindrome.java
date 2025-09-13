@@ -2,23 +2,29 @@ package dp.strings;
 
 public class _05_min_insertions_to_make_plaindrome {
     // do - (LPS) Longest Palindrome Sub Sequence b/w 's' & 's.reverse'
-    // then ---> n-LPS
+    // then ---> n - LPS = min insertions
+    // LPS is same as LCS b/w 's' & 's.reverse'
+    // (n-LPS) = basically the chars which are either diff or not in correct position
+    // so we need to insert those chars on the opposite side to make the string palindrome
     
     public int minInsertions(String s) {
         int n = s.length();
         String t = new StringBuilder(s).reverse().toString();
         int[] prev = new int[n+1];
+        prev[n] = 0; //~~
 
-        for (int i=1; i<=n; i++) {
+        for (int i=n-1; i>=0; i--) {
             int[] dp = new int[n+1];
+            dp[n] = 0; //~~
 
-            for (int j=1; j<=n; j++) {
-                if (s.charAt(i-1) == t.charAt(j-1)) dp[j] = 1 + prev[j-1];
-                else dp[j] = Math.max(dp[j-1], prev[j]);
+            for (int j=n-1; j>=0; j--) {
+                if (s.charAt(i) == t.charAt(j)) dp[j] = 1 + prev[j+1];
+                else dp[j] = Math.max(dp[j+1], prev[j]);
             }
             prev = dp;
         }
-        int longestPalindromeSubseq = prev[n];
+
+        int longestPalindromeSubseq = prev[0];
         return n - longestPalindromeSubseq;
     }
 }

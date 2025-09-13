@@ -3,16 +3,17 @@ package dp.strings;
 public class _03_longest_common_substring {
     
     public int longestCommonSubstr(String s1, String s2) {
-        // code here
         int n = s1.length(), m = s2.length();
         int[] prev = new int[m+1];
-        int max = 0;
+        prev[m] = 0; //~~
         
-        for (int i=1; i<=n; i++) {
+        int max = 0;
+        for (int i=n-1; i>=0; i--) {
             int[] dp = new int[m+1];
-            // dp[0] = 0;
-            for (int j=1; j<=m; j++) {
-                if (s1.charAt(i-1) == s2.charAt(j-1)) dp[j] = 1 + prev[j-1];
+            dp[0] = 0; //~~
+            
+            for (int j=m-1; j>=0; j--) {
+                if (s1.charAt(i) == s2.charAt(j)) dp[j] = 1 + prev[j+1];
                 max = Math.max(max, dp[j]);
             }
             prev = dp;
@@ -35,6 +36,7 @@ public class _03_longest_common_substring {
 
 /*
 https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
+// naukri has a issue - no java only cpp
 https://youtu.be/_wP9mWNPL5w - striver
 
  * You are given two strings s1 and s2. Your task is to find the length of the longest common substring among the given strings.

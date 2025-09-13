@@ -9,25 +9,27 @@ public class _01_longest_common_subsequence {
     }
 
     public static int longestCommonSubsequence(String text1, String text2) {
-        int n = text1.length(), m = text2.length();
-        int[] prev = new int[m+1];
-        
-        for (int i=1; i <= n; i++) {
-            int[] dp = new int[m+1];
-            // dp[0] = 0
-            for (int j=1; j <= m; j++) {
-                if (text1.charAt(i-1) == text2.charAt(j-1)) {
-                    dp[j] = 1 + prev[j-1];
+        // dp[i][j] --> LCS starting at position i,  j for t1 & t2 respectively
+        // if i == j --> move nxt on both Str.  i+1, j+1 
+        // else check max of (stay one & move other)
+        int m = text1.length();
+        int n = text2.length();
+        int[] prev = new int[n+1];
+        prev[n] = 0;
+
+        for (int i=m-1; i>=0; i--) {
+            int[] dp = new int[n+1];
+            dp[n] = 0;
+
+            for (int j=n-1; j>=0; j--) {
+                if (text1.charAt(i) == text2.charAt(j)) {
+                    dp[j] = 1 + prev[j+1];
                 }
-                else {
-                    // max of recrusion tree left,right
-                    // left = dp[j-1],   right = prev[j]
-                    dp[j] = Math.max(dp[j-1], prev[j]);
-                }
+                else dp[j] = Math.max(prev[j], dp[j+1]);
             }
             prev = dp;
         }
-        return prev[m];
+        return prev[0];
     }
 
 
