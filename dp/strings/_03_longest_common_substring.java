@@ -1,6 +1,9 @@
 package dp.strings;
 
 public class _03_longest_common_substring {
+    // A substring is  contiguous part of string
+    // LCS is not contiguous
+    // so we need to check for complete diagonal match and if it breaks then reset to 0
     
     public int longestCommonSubstr(String s1, String s2) {
         int n = s1.length(), m = s2.length();

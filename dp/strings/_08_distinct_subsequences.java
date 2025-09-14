@@ -10,7 +10,7 @@ public class _08_distinct_subsequences {
     // Therefore we don't need the lengths of lcs at (i,j), just the counts.
     
     public int numDistinct(String s, String t) {
-        // dp[i][j] --> how many subsq can u form from s starting at 'i' & t at 'j'
+        // dp[i][j] --> how many subsq of t starting at 'j' can u make from s starting at 'i'
         int n = s.length(), m = t.length();
         int[] prev = new int[m+1];
         prev[m] = 1; // how many subsq can u form from s when t is zero len
@@ -20,7 +20,7 @@ public class _08_distinct_subsequences {
             dp[m] = 1; // how many subsq can u form from s when t is zero len
 
             for(int j=m-1; j>=0; j--) {
-                if (s.charAt(i) == t.charAt(j)) dp[j] = prev[j+1] + prev[j];
+                if (s.charAt(i) == t.charAt(j)) dp[j] = prev[j+1] + prev[j]; // { take noTake }
                 else dp[j] = prev[j];
             }
             prev = dp;

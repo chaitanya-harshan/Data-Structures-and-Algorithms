@@ -5,11 +5,14 @@ public class _09_edit_distance {
     // If a character is equal, then move to the next substring in both the strings. If it's not 
     // equal, check which operation is resulting in the minimum ops for insert, replace, and delete
     // And that will be the number of ops required to convert word 1 to 2 starting at index i, j.
+    
     public int minDistance(String word1, String word2) {
         // you might need to watch NeetCode
         int n = word1.length(), m = word2.length();
+        //----------------------------------------------------------------
         int[] prev = new int[m+1];
         for (int i=0; i<m; i++) prev[i] = m-i;
+        //----------------------------------------------------------------
 
         for (int i=n-1; i>=0; i--) {
             int[] dp = new int[m+1];
