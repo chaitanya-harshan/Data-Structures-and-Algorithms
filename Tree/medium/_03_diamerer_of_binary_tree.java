@@ -14,7 +14,9 @@ class _03_diamerer_of_binary_tree {
 
         int left = depth(root.left);
         int right = depth(root.right);
-        max = Math.max(max, left + right);
+        
+        int diameter = left + right;
+        max = Math.max(max, diameter);
 
         return 1 + Math.max(left, right);
     }

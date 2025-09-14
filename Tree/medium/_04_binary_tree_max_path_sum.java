@@ -5,22 +5,22 @@ public class _04_binary_tree_max_path_sum {
     int max = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
-        dfs(root);
+        dfs_sum(root);
         return max;
     }
 
-    public int dfs(TreeNode root) {
+    int dfs_sum(TreeNode root) {
         if (root == null) return 0;
 
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-        int sum = root.val;
-        if (left > 0) sum += left;
-        if (right > 0) sum += right;
+        int left = dfs_sum(root.left);
+        int right = dfs_sum(root.right);
 
-        max = Math.max(max, sum);
+        int diameter_sum = root.val;
+        if (left > 0) diameter_sum += left;
+        if (right > 0) diameter_sum += right;
+        max = Math.max(max, diameter_sum);
 
-        return root.val + Math.max(left, Math.max(right, 0));
+        return root.val + Math.max(0, Math.max(left, right));
     }
 }
 

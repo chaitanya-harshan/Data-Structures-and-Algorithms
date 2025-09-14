@@ -1,6 +1,7 @@
 package Tree.medium;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -10,10 +11,10 @@ public class _06_binary_tree_zig_zag_level_order_traversal {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if (root == null) return new ArrayList<>();
 
+        List<List<Integer>> res = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
-        List<List<Integer>> res = new ArrayList<>();
-        boolean parity = true;
+        boolean parity = false;
 
         while (!q.isEmpty()) {
             int len = q.size();
@@ -21,16 +22,15 @@ public class _06_binary_tree_zig_zag_level_order_traversal {
 
             for (int i=0; i<len; i++) {
                 TreeNode cur = q.poll();
-
-                if (parity) list.add(cur.val);
-                else list.add(0, cur.val);
-
+                list.add(cur.val);
+                
                 if (cur.left != null) q.offer(cur.left);
                 if (cur.right != null) q.offer(cur.right);
             }
             
-            parity = !parity;
+            if (parity) Collections.reverse(list);
             res.add(list);
+            parity = !parity;
         }
         return res;
     }
