@@ -1,6 +1,6 @@
 package arrays.easy;
 
-public class singleNum {
+public class _12_singleNum {
     public static void main(String[] args) {
         int[] arr = {4,1,2,1,2,5,5};
         singleNum(arr);

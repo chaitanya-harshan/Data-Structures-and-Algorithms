@@ -1,6 +1,6 @@
 package arrays.easy;
 
-public class maxConsequitive1s {
+public class _11_maxConsequitive1s {
     public int findMaxConsecutiveOnes(int[] nums) {
         if (nums.length == 1) return nums[0];
 
@@ -27,12 +27,10 @@ public class maxConsequitive1s {
         int maxCount = 0;
         int count = 0;
         for (int i=0; i<nums.length; i++) {
-            if (nums[i] == 1) {
-                count++;
-            }
+            if (nums[i] == 1) count++;
             else count = 0;
 
-            if (count > maxCount) maxCount = count;
+            maxCount = Math.max(count, maxCount);
         }
         return maxCount;
     }

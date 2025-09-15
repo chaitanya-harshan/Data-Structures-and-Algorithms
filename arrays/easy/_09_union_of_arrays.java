@@ -6,7 +6,7 @@ import java.util.HashSet;
 /**
  * union
  */
-public class union_of_arrays {
+public class _09_union_of_arrays {
 
     public static void main(String[] args) {
         // int[] arr1 = {1,2,3,4,5};
@@ -39,11 +39,11 @@ public class union_of_arrays {
         }
         
         while (l < a.length) {
-            union.add(a[l]);
+            if (union.getLast() != a[l]) union.add(a[l]);
             l++;
         }
         while (r < b.length) {
-            union.add(b[r]);
+            if (union.getLast() != b[r]) union.add(b[r]);
             r++;
         }
         

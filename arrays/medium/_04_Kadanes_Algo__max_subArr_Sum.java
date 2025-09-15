@@ -19,10 +19,7 @@ public class _04_Kadanes_Algo__max_subArr_Sum {
  * https://leetcode.com/problems/maximum-subarray/description/
  * 
 Given an integer array nums, find the 
-subarray
- with the largest sum, and return its sum.
-
- 
+subarray with the largest sum, and return its sum.
 
 Example 1:
 

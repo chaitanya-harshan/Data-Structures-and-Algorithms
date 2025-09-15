@@ -3,7 +3,7 @@ package arrays.easy;
 import java.util.HashMap;
 import java.util.Map;
 
-public class missingNumber {
+public class _10_missingNumber {
 
     // -----1------
 

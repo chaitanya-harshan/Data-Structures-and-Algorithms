@@ -1,7 +1,7 @@
 package _extras.arrays.easy;
 
-class moveZeroes {
-    public void moveZeroes(int[] nums) {
+class _07_moveZeroes {
+    public void _07_moveZeroes(int[] nums) {
         int i = 0;
         for (int j=0; j<nums.length; j++) {
             if (nums[j] != 0) {

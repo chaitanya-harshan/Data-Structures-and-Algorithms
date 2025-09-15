@@ -1,7 +1,7 @@
 package arrays.easy;
 import java.util.HashMap;
 
-public class longSubArrSumK {
+public class _13_longSubArrSumK {
     public static void main(String[] args) {
         int[] arr = {2,3,0,0,-1,6,1,9};
         System.out.println(getLongestSubArr(arr, 10));
