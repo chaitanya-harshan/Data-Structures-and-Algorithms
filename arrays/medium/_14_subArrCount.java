@@ -3,7 +3,29 @@ package arrays.medium;
 import java.util.HashMap;
 
 public class _14_subArrCount {
+    // Remember: 1) map stores how many times a {sum} occurs
+    //           2) check for (sum-k) before inserting sum (to resolve issue where k = 0)
     public int subarraySum(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int cnt = 0;
+
+        int sum = 0;
+        for (int i : nums) {
+            sum += i;
+            if (sum == k) cnt++;
+            if (map.containsKey(sum - k)) cnt += map.get(sum-k);
+            // We need to check if (sum-k) exists or not before we put {sum} in the map
+            // because if k = 0 then [sum-0] -> [sum] will always exists in case we insert it before.
+            // --- The only way we get sum = 0 is when the current sum is 0
+            // the other way is when we take empty subArr which isn't possible
+            map.put(sum, map.getOrDefault(sum,0) + 1);
+            
+        }
+        return cnt;
+    }
+
+    // OLD VERSION
+    public int subarraySum1(int[] nums, int k) {
         // you need to watch strivers video to understand
         // time stamp included in the video - 10:42
         // https://youtu.be/xvNwoz-ufXA?si=fOC9hcGBnBDthiIY&t=642
