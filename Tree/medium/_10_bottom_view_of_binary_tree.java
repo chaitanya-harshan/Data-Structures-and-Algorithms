@@ -3,6 +3,7 @@ package Tree.medium;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
 
@@ -44,32 +45,32 @@ class Pair {
     }
 }
 
-// public class _10_bottom_view_of_binary_tree {
-//     // _________________________________________________________________________
-//     // stack overflow -- DFS approach
-//     static Map<Integer, int[]> map = new TreeMap<>();
+// _________________________________________________________________________________________________________
+// stack overflow -- DFS approach
+class _10_bottom_view_of_binary_tree_DFS {
+    static Map<Integer, int[]> map = new TreeMap<>();
 
-//     public static List<Integer> bottomView(TreeNode root) {
-//         dfs(root, 0,0);
-//         List<Integer> bottom = new ArrayList<>();
-//         for (int[] element : map.values()) {
-//             bottom.add(element[1]);
-//         }
-//         return bottom;
-//     }
+    public static List<Integer> bottomView(TreeNode root) {
+        dfs(root, 0,0);
+        List<Integer> bottom = new ArrayList<>();
+        for (int[] element : map.values()) {
+            bottom.add(element[1]);
+        }
+        return bottom;
+    }
 
-//     static void dfs(TreeNode root, int x, int y) {
-//         if (root == null) return;
+    static void dfs(TreeNode root, int x, int y) {
+        if (root == null) return;
 
-//         if (!map.containsKey(x)) map.put(x, new int[]{y, root.val});
-//         else {
-//             if (y >= map.get(x)[0]) map.put(x, new int[]{y, root.val});
-//         }
+        if (!map.containsKey(x)) map.put(x, new int[]{y, root.val});
+        else {
+            if (y >= map.get(x)[0]) map.put(x, new int[]{y, root.val});
+        }
 
-//         dfs(root.left, x-1, y+1);
-//         dfs(root.right, x+1, y+1);
-//     }
-// }
+        dfs(root.left, x-1, y+1);
+        dfs(root.right, x+1, y+1);
+    }
+}
 
 
 /*
@@ -77,28 +78,23 @@ class Pair {
 https://www.naukri.com/code360/problems/bottom-view-of-binary-tree_893110
 
 You are given a 'Binary Tree'.
-
-
-
 Return the bottom view of the binary tree.
-
-
 
 Note :
 1. A node will be in the bottom-view if it is the bottom-most node at its horizontal distance from the root. 
-
-2. The horizontal distance of the root from itself is 0. The horizontal distance of the right child of the root node is 1 and the horizontal distance of the left child of the root node is -1. 
-
-3. The horizontal distance of node 'n' from root = horizontal distance of its parent from root + 1, if node 'n' is the right child of its parent.
-
-4. The horizontal distance of node 'n' from root = horizontal distance of its parent from the root - 1, if node 'n' is the left child of its parent.
-
-5. If more than one node is at the same horizontal distance and is the bottom-most node for that horizontal distance, including the one which is more towards the right.
+2. The horizontal distance of the root from itself is 0. The horizontal distance of the right child of the 
+    root node is 1 and the horizontal distance of the left child of the root node is -1. 
+3. The horizontal distance of node 'n' from root = horizontal distance of its parent from root + 1, 
+    if node 'n' is the right child of its parent.
+4. The horizontal distance of node 'n' from root = horizontal distance of its parent from the root - 1, 
+    if node 'n' is the left child of its parent.
+5. If more than one node is at the same horizontal distance and is the bottom-most node for that horizontal 
+    distance, including the one which is more towards the right.
 
 
 Example:
-Input: Consider the given Binary Tree:
 
+Input: Consider the given Binary Tree:
 Output: 4 2 6 3 7
 
 Explanation:
