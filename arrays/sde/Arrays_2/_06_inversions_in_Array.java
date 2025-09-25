@@ -29,6 +29,7 @@ public class _06_inversions_in_Array {
         int left = low;
         int right = mid+1;
         List<Long> list = new ArrayList<>();
+        // int prev = right-1; //
 
         while (left <= mid || right <= high) {
             if (left <= mid && right < high && arr[left] <= arr[right]) {
@@ -38,6 +39,8 @@ public class _06_inversions_in_Array {
             else if (left <= mid && right <= high && arr[left] > arr[right]) {
                 list.add(arr[right]);
                 cnt += mid-left+1;
+                // cnt += (right-prev)*(mid-left+1);// --> r-p => r+1-r == 1 (always) DUMB ASS
+                // prev = right;  // since you're always doing p = r when r changes and then r++
                 right++;
             }
             else if (left <= mid) { // if elements on the left half are still left

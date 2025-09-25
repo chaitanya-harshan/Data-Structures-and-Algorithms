@@ -3,7 +3,7 @@ package arrays.medium;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class _09_long_conSeq_unsorted {
+public class _10_long_conSeq_unsorted {
     
     public int longestConsecutive(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
