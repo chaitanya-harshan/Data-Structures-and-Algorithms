@@ -1,6 +1,6 @@
 package arrays.sde.Arrays_1;
 
-public class _01_set_matrix_seros {
+public class _01_set_matrix_zeros {
     
     public void setZeroes(int[][] matrix) {
 
