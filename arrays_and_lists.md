@@ -20,4 +20,7 @@ ArrayList<Integer> arrayList = new ArrayList<>(list);
 int[] arr = {1, 2, 3};
 ArrayList<Integer> arrayList = new ArrayList<>(Arrays.stream(arr).boxed().toList());
 ```
-______________________________________________________________________________
+___
+
+`new ArrayList<>(Arrays.asList(nums[i], nums[l], nums[r]);`
+___________________________________________________________________________

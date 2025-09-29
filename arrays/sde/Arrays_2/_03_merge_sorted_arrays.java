@@ -62,7 +62,7 @@ public class _03_merge_sorted_arrays {
     }
 }
 
-// https://leetcode.com/problems/merge-sorted-array/
+// https://leetcode.com /problems/merge-sorted-array/
 // https://www.youtube.com/watch?v=P1Ic85RarKY
 
 // starting from index back to 0 and checking for max beteween nums1[i] & nums2[j] 
