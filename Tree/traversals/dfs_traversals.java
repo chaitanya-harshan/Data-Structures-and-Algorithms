@@ -1,4 +1,4 @@
-package Tree.traversals;
+package Trees.traversals;
 
 import java.util.ArrayList;
 import java.util.List;
