@@ -3,7 +3,7 @@ package binary_search_trees;
 import java.util.ArrayList;
 import java.util.List;
 
-public class _10_merge_2_BST_return_treeNode {
+public class _10_merge_multiple_BST_return_treeNode {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         // Step 1: Get sorted lists from both trees using in-order traversal.
         List<Integer> list1 = new ArrayList<>();

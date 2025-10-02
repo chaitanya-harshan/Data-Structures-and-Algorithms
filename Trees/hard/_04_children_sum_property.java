@@ -1,11 +1,11 @@
 package Trees.hard;
 
 public class _04_children_sum_property {
-    public static void changeTree(BinaryTreeNode < Integer > root) {
+    public static void changeTree(BinaryTreeNode < Integer >  root) {
         if (root == null) return;
         
         BinaryTreeNode left = root.left;
-        BinaryTreeNode right = root.right;
+        BinaryTreeNode right = root.right; 
         int child = 0;
         if (left != null) child += left.data;
         if (right != null) child += right.data;

@@ -8,6 +8,7 @@ import java.util.Queue;
 
 public class _05_print_nodes_at_distance_k_in_B_tree {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        // if (k == 0) return new ArrayList<>(Arrays.asList(target.val));
         HashMap<TreeNode, TreeNode> parent = new HashMap<>();
         makeParents(root, parent);
 
@@ -19,7 +20,7 @@ public class _05_print_nodes_at_distance_k_in_B_tree {
         int distance = 0;
         while (!q.isEmpty()) {
             int size = q.size();
-            if (distance == k) break;
+            if (distance == k) break; // this is here because to handle case k = 0
 
             for (int i=0; i<size; i++) {
                 TreeNode node = q.poll();
@@ -39,6 +40,7 @@ public class _05_print_nodes_at_distance_k_in_B_tree {
                 }
             }
             distance++;
+            // if (distance == k) break;
         }
 
         ArrayList<Integer> res = new ArrayList<>();

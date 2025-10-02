@@ -61,21 +61,14 @@ public class _06_min_time_to_infect_tree_from_target_node {
     }
 
     TreeNode findNode(TreeNode root, int target) {
-        if (root == null) {
-            return null;
-        }
-        if (root.val == target) {
-            return root;
-        }
+        if (root == null) return null;
+        if (root.val == target) return root;
 
         TreeNode left = findNode(root.left, target);
         TreeNode right = findNode(root.right, target);
 
-        if (left != null) {
-            return left; 
-        }else {
-            return right;
-        }
+        if (left != null) return left; 
+        else return right;
     }
 }
 

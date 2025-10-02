@@ -3,7 +3,7 @@ package Trees.hard;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class _03_max_width_of_binary_tree {
+public class _03_max_level_order_width_of_binary_tree {
     public int widthOfBinaryTree(TreeNode root) {
         int max = 0;
         Queue<Node> q = new LinkedList();

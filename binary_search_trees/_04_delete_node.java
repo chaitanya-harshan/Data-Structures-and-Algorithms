@@ -25,6 +25,7 @@ public class _04_delete_node {
         return root;
     }
 
+    // morris traversal ish approach
     TreeNode helper(TreeNode root) {
         if (root.left == null) return root.right;
         if (root.right == null) return root.left;
