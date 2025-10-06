@@ -1,4 +1,4 @@
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 public class _06_subsets_sum_exists {
     public static void main(String[] args) {

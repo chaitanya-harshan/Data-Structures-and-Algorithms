@@ -1,4 +1,4 @@
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 import java.util.ArrayList;
 import java.util.Arrays;

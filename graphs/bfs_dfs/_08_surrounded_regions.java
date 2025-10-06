@@ -1,41 +1,44 @@
-package graphs;
+package graphs.bfs_dfs;
 
-public class _02_surrounding_regions {
+public class _08_surrounded_regions {
+    // we start from all the border connected 'O' and traverse the connected nodes to those and 
+    // turn them into 'T'. Now we know the reaming 'O' are surrounded.
     public void solve(char[][] board) {
-        int n = board.length;
-        int m = board[0].length;
-        boolean[][] visited = new boolean[n][m];
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+
+        for (int j=0; j<n; j++) {
+            if (board[0][j] == 'O' && !visited[0][j]) dfs(board, visited, 0,j);
+            if (board[m-1][j] == 'O' && !visited[m-1][j]) dfs(board, visited, m-1,j);
+        }
+        for (int i=1; i<m-1; i++) {
+            if (board[i][0] == 'O' && !visited[i][0]) dfs(board, visited, i,0);
+            if (board[i][n-1] == 'O' && !visited[i][n-1]) dfs(board, visited, i,n-1);
+        }
 
         for (int i=0; i<m; i++) {
-            if (board[0][i] == 'O') dfs(board, visited, 0,i,n,m);
-            if (board[n-1][i] == 'O') dfs(board, visited, n-1,i,n,m);
-        }
-        for (int i=1; i<n-1; i++) {
-            if (board[i][0] == 'O') dfs(board, visited, i,0,n,m);
-            if (board[i][m-1] == 'O') dfs(board, visited, i,m-1,n,m);
-        }
-
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<m; j++) {
+            for (int j=0; j<n; j++) {
                 if (board[i][j] == 'O') board[i][j] = 'X';
                 if (board[i][j] == 'T') board[i][j] = 'O';
             }
         }
     }
 
-    void dfs(char[][] board, boolean[][] visited, int i, int j, int n, int m) {
+    void dfs(char[][] board, boolean[][] visited, int i, int j) {
+        int m = board.length, n = board[0].length;
         visited[i][j] = true;
         board[i][j] = 'T';
 
-        int[] rc = {-1,0,1,0};
-        int[] cc = {0,1,0,-1};
+        int[] dr = {-1,0,1,0};
+        int[] dc = {0,1,0,-1};
 
         for (int d=0; d<4; d++) {
-            int r = i + rc[d];
-            int c = j + cc[d];
+            int r = i + dr[d];
+            int c = j + dc[d];
 
-            if (r < 0 || r >= n || c < 0 || c >= m || board[r][c] == 'X' || visited[r][c]) continue;
-            dfs(board, visited, r,c,n,m);
+            if (r < 0 || r >= m || c < 0 || c >= n || board[r][c] != 'O' || visited[r][c]) continue;
+            dfs(board, visited, r,c);
         }
     }
 }

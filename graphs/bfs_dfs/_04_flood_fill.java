@@ -1,42 +1,55 @@
-package graphs;
+package graphs.bfs_dfs;
+
+import java.util.*;
 
 public class _04_flood_fill {
-
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        // Get the original color of the starting pixel.
-        int startColor = image[sr][sc];
-
-        // If the starting pixel already has the target color, no work is needed.
-        // This check also prevents an infinite recursion loop if startColor == color.
-        if (startColor != color) {
-            dfs(image, sr, sc, startColor, color);
-        }
-
+        if (image[sr][sc] == color) return image; // if equal then we wil visit the same nodes
+        // again and again causing TLE (unless we use a visited array)
+        dfs(image, sr, sc, image[sr][sc], color);
         return image;
     }
 
-    private void dfs(int[][] image, int r, int c, int startColor, int newColor) {
-        // --- Base Cases for stopping the recursion ---
+    void dfs(int[][] image, int i, int j, int og, int color) {
+        if (i < 0 || i >= image.length || j < 0 || j >= image[0].length) return;
+        if (image[i][j] != og) return;
 
-        // 1. Check for out of bounds.
-        if (r < 0 || r >= image.length || c < 0 || c >= image[0].length) {
-            return;
+        image[i][j] = color;
+
+        dfs(image, i-1, j, og, color);
+        dfs(image, i+1, j, og, color);
+        dfs(image, i, j-1, og, color);
+        dfs(image, i, j+1, og, color);
+    }
+
+// BFS ==============================================================================================
+    public int[][] floodFill1(int[][] image, int sr, int sc, int color) {
+        if (image[sr][sc] == color) return image; // if equal then we wil visit the same nodes
+        // again and again causing TLE (unless we use a visited array)
+
+        int m = image.length, n = image[0].length;
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{sr,sc});
+
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = {0, -1, 0, 1};
+        int og = image[sr][sc];
+
+        while (!q.isEmpty()) {
+            int row = q.peek()[0];
+            int col = q.poll()[1];
+
+            image[row][col] = color;
+
+            for (int i=0; i<4; i++) {
+                int r = row + dr[i];
+                int c = col + dc[i];
+                if (r < 0 || r >= m || c < 0 || c >= n) continue;
+
+                if (image[r][c] == og) q.offer(new int[]{r,c});
+            }
         }
-
-        // 2. Check if the current pixel is not the color we want to replace.
-        if (image[r][c] != startColor) {
-            return;
-        }
-
-        // --- Action ---
-        // Change the color of the current pixel.
-        image[r][c] = newColor;
-
-        // --- Recursive Calls for 4-directional neighbors ---
-        dfs(image, r + 1, c, startColor, newColor); // Down
-        dfs(image, r - 1, c, startColor, newColor); // Up
-        dfs(image, r, c + 1, startColor, newColor); // Right
-        dfs(image, r, c - 1, startColor, newColor); // Left
+        return image;
     }
 }
 

@@ -1,48 +1,47 @@
-package graphs;
+package graphs.bfs_dfs;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class _05_rotting_oranges {
+public class _03_rotten_oranges {
     public int orangesRotting(int[][] grid) {
-        int n = grid.length;
-        int m = grid[0].length;
         Queue<int[]> q = new LinkedList<>();
-        int time = 0;
-        int fresh = 0;
-        // if (fresh == 0) return 0; // redundant but inc eff
-
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<m; j++) {
-                if (grid[i][j] == 1) fresh++;
-                if (grid[i][j] == 2) q.offer(new int[]{i,j});
+        int oranges = 0;
+        // Adding rotten oranges to the Queue for starting points of infection
+        for (int i=0; i<grid.length; i++) {
+            for (int j=0; j<grid[0].length; j++) {
+                if (grid[i][j] == 1) oranges++;
+                else if (grid[i][j] == 2) q.offer(new int[]{i,j});
             }
         }
 
-        int[] rc = {-1,0,1,0};
-        int[] cc = {0,-1,0,1};
+        int m = grid.length, n = grid[0].length;
+        int[] di = {-1, 0, 1, 0};
+        int[] dj = {0, -1, 0, 1};
 
+        int time = 0;
         while (!q.isEmpty()) {
-            int len = q.size();
-            for (int k=0; k<len; k++) {
+            int size = q.size();
+
+            for (int k=0; k<size; k++) {
                 int row = q.peek()[0];
                 int col = q.poll()[1];
 
                 for (int i=0; i<4; i++) {
-                    int r = row + rc[i];
-                    int c = col + cc[i];
-                    if (r < 0 || r >= n || c < 0 || c >= m) continue;
+                    int R = row + di[i];
+                    int C = col + dj[i];
+                    if (R < 0 || R >= m || C < 0 || C >= n) continue;
 
-                    if (grid[r][c] == 1) {
-                        grid[r][c] = 2;
-                        q.offer(new int[]{r,c});
-                        fresh--;
+                    if (grid[R][C] == 1) {
+                        grid[R][C] = 2;
+                        q.offer(new int[]{R,C});
+                        oranges--;
                     }
                 }
             }
-            if (!q.isEmpty()) time++;
+            if (!q.isEmpty()) time++; // only if we found somthing to infect
         }
-        return (fresh == 0) ? time : -1;
+        return (oranges == 0) ? time : -1;
     }
 }
 

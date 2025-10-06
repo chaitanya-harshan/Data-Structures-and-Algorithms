@@ -6,7 +6,7 @@ n = 6, arr = [5, 2, 3, 10, 6, 8], sum = 10
 Output:3
 Explanation: {5, 2, 3}, {2, 8}, {10} are possible subsets.
  */
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 public class _05_num_of_subsets_with_sumK {
     

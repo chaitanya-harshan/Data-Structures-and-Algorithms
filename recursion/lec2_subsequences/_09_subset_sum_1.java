@@ -21,7 +21,7 @@ So, subset sum are [0,1,2,3].
 https://practice.geeksforgeeks.org/problems/subset-sums2234/1
 https://www.naukri.com/code360/problems/subset-sum_3843086
  */
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 import java.util.ArrayList;
 import java.util.List;

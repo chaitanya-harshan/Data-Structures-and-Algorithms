@@ -27,7 +27,7 @@ Output: []
 https://leetcode.com/problems/combination-sum/
 https://youtu.be/GBKI9VSKdGg - neetcode
  */
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,7 +20,7 @@ Output:
 
 https://leetcode.com/problems/combination-sum-ii/description/
  */
-package recursion.lec2;
+package recursion.lec2_subsequences;
 
 import java.util.ArrayList;
 import java.util.Arrays;
