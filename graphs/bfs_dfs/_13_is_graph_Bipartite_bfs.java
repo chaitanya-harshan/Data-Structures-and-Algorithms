@@ -1,7 +1,6 @@
 package graphs.bfs_dfs;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class _13_is_graph_Bipartite_bfs {
@@ -33,24 +32,14 @@ public class _13_is_graph_Bipartite_bfs {
         }
         return true;
     }
-    boolean bfs(int i, List<Integer>[] adj, int[] color, List<Integer> nodes) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(i);
-        nodes.add(i);
-        color[i] = -1;
 
-        while(!q.isEmpty()) {
-            int node = q.poll();
+    boolean dfs(int i, int[][] graph, int[] color, int c) {
+        color[i] = c;
 
-            for (int nei: adj[node]) {
-                if (color[nei] == 0) {
-                    color[nei] = -color[node];
-                    q.offer(nei);
-                }
-                else if (color[nei] == color[node]) return false;
-
-                nodes.add(nei);
-            }
+        for (int nei : graph[i]) {
+            if (color[nei] == 0) {
+                if (!dfs(nei, graph, color, -c)) return false;
+            } else if (color[nei] == color[i]) return false;
         }
         return true;
     }

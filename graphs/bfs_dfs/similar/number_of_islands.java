@@ -1,9 +1,9 @@
-package graphs;
+package graphs.bfs_dfs.similar;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class _02_number_of_islands_bfs {
+public class number_of_islands {
     public int numIslands(char[][] grid) {
         int n = grid.length;
         int m = grid[0].length;

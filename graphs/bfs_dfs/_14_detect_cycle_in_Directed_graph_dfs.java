@@ -4,31 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _14_detect_cycle_in_Directed_graph_dfs {
-    public static boolean detectCycleInDirectedGraph(int n, ArrayList<ArrayList<Integer>> edges) {
-        List<Integer>[] adj = new ArrayList[n+1];
-        for (int i=1; i<=n; i++) adj[i] = new ArrayList<>();
-        for (List<Integer> e : edges) adj[e.get(0)].add(e.get(1));
-    
-        boolean[] visited = new boolean[n+1];
-        boolean[] path = new boolean[n+1];
-    
-        for (int i=1; i<=n; i++) {
-          if (!visited[i] && dfs(i, adj, visited, path)) return true;
-        }
-        return false;
+
+  // this is using DFS
+  // BFS --- Khan's algo in topo sort
+  public static boolean detectCycleInDirectedGraph(int n, ArrayList<ArrayList<Integer>> edges) {
+    List<Integer>[] adj = new ArrayList[n + 1];
+    for (int i = 1; i <= n; i++) adj[i] = new ArrayList<>();
+    for (List<Integer> e : edges) adj[e.get(0)].add(e.get(1));
+
+    boolean[] visited = new boolean[n + 1];
+    boolean[] path = new boolean[n + 1];
+
+    for (int i = 1; i <= n; i++) {
+      if (!visited[i] && dfs(i, adj, visited, path)) return true;
+    }
+    return false;
+  }
+
+  static boolean dfs(int i, List<Integer>[] adj, boolean[] visited, boolean[] path) {
+    visited[i] = true;
+    path[i] = true;
+
+    for (int nei : adj[i]) {
+      if (path[nei]) return true;
+      if (!visited[nei] && dfs(nei, adj, visited, path)) {
+        return true;
       }
-    
-      static boolean dfs(int i, List<Integer>[] adj, boolean[] visited, boolean[] path) {
-        visited[i] = true;
-        path[i] = true;
-    
-        for (int nei: adj[i]) {
-          if (path[nei]) return true;
-          if (!visited[nei] && dfs(nei, adj, visited, path)) return true;
-        }
-        path[i] = false;
-        return false;
-      }
+    }
+    path[i] = false;
+    return false;
+  }
 }
 
 /*
