@@ -59,6 +59,7 @@ class DSU {
     int sets;
 
     public DSU(int n) {
+        this.sets = n;
         parent = new int[n];
         size = new int[n];
         for (int i = 0; i < n; i++) {

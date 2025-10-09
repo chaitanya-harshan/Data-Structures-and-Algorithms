@@ -5,18 +5,11 @@ import java.util.PriorityQueue;
 
 public class _mst_prim {
     public int spanningTree(int V, int[][] edges) {
-        // Create adjacency list
         ArrayList<int[]>[] adj = new ArrayList[V];
         for (int i = 0; i < V; i++) adj[i] = new ArrayList<>();
-        
-        // Build adjacency list from edges array
-        for (int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-            int weight = edge[2];
-            
-            adj[u].add(new int[]{v, weight});
-            adj[v].add(new int[]{u, weight});
+        for (int[] e: edges) {
+            adj[e[0]].add(new int[]{e[1], e[2]});
+            adj[e[1]].add(new int[]{e[0], e[2]});
         }
 
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
@@ -28,7 +21,7 @@ public class _mst_prim {
             int cur = pq.peek()[0];
             int wt = pq.poll()[1];
 
-            if (visited[cur]) continue;
+            if (visited[cur]) continue; // this check is for when a edge is added but also added a less wt edges after so this first edge will stay and the less wt edge path consume other nodes and when we come back to the first edge it's probably already consumed so we always check for if its visited.
             visited[cur] = true;
             mstWeight += wt;
 
