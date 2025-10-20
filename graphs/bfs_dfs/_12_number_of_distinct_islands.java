@@ -42,9 +42,11 @@ public class _12_number_of_distinct_islands {
 /*
 https://www.naukri.com/code360/problems/distinct-islands_630460
 
- * You are given a two-dimensional array/list of integers consisting of 0s and 1s. In the list, 1 represents land and 0 represents water.
+ * You are given a two-dimensional array/list of integers consisting of 0s and 1s. 
+ * In the list, 1 represents land and 0 represents water.
 
-The task is to find the number of distinct islands where a group of connected 1s(horizontally or vertically) forms an island.
+The task is to find the number of distinct islands where a group of connected 1s
+(horizontally or vertically) forms an island.
 
 Note:
 Two islands are considered to be the same if and only if one island is equal to another(not rotated or reflected) i.e if we can translate one island on another without rotating or reflecting then it would be considered as the same islands. 

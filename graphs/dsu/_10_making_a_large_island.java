@@ -2,18 +2,21 @@ package graphs.dsu;
 
 import java.util.HashSet;
 
-public class making_a_large_island {
+public class _10_making_a_large_island {
     public int largestIsland(int[][] grid) {
         int n = grid.length;
-        DSU uf = new DSU(n*n);
         int[] dr = {-1,0,1,0};
         int[] dc = {0,1,0,-1};
 
+        DSU uf = new DSU(n*n);
+
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
+
                 if (grid[i][j] == 0) continue;
                 for (int d=0; d<4; d++) {
-                    int r = i + dr[d], c = j + dc[d];
+                    int r = i + dr[d];
+                    int c = j + dc[d];
 
                     if (isValid(r,c,n) && grid[r][c] == 1) uf.union(i*n+j, r*n+c);
                 }
@@ -23,11 +26,13 @@ public class making_a_large_island {
         int maxSize = 0;
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                if (grid[i][j] == 1) continue;
-                HashSet<Integer> set = new HashSet<>();
 
+                if (grid[i][j] == 1) continue;
+
+                HashSet<Integer> set = new HashSet<>();
                 for (int d=0; d<4; d++) {
-                    int r = i + dr[d], c = j + dc[d];
+                    int r = i + dr[d];
+                    int c = j + dc[d];
                     if (isValid(r,c,n) && grid[r][c] == 1) {
                         set.add(uf.find(r*n+c));
                     }
@@ -38,8 +43,7 @@ public class making_a_large_island {
                 maxSize = Math.max(maxSize, size);
             }
         }
-        maxSize = Math.max(maxSize, uf.size[0]); // incase all are 1's
-        return maxSize;
+        return Math.max(maxSize, uf.size[0]); // incase all are 1's
     }
 
     private boolean isValid(int i, int j, int n) {
@@ -69,11 +73,11 @@ class DSU {
         return parent[i] = find(parent[i]);
     }
 
-    void union(int i, int j) {
+    boolean union(int i, int j) {
         int pi = find(i);
         int pj = find(j);
 
-        if (pi == pj) return;
+        if (pi == pj) return false;
 
         if (size[pi] < size[pj]) {
             parent[pi] = pj;
@@ -84,8 +88,10 @@ class DSU {
         }
 
         sets--;
+        return true;
     }
 }
+
 
 /*
  * URL: https://leetcode.com/problems/making-a-large-island/description/

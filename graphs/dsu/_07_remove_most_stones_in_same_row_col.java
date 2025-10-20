@@ -1,27 +1,40 @@
 package graphs.dsu;
 
-public class _remove_stones_in_same_row_col {
+import java.util.HashSet;
+
+public class _07_remove_most_stones_in_same_row_col {
+    // we see each row & col as nodes and each stone x,y acts as a edge connecting x & y.
+    // after connecting we will consider/take one stone from each node
+    // then total stones - these one_stone_per_connected_component
     public int removeStones(int[][] stones) {
         int maxRow = 0, maxCol = 0;
-        for (int[] s: stones) {
-            maxRow = Math.max(maxRow, s[0]);
-            maxCol = Math.max(maxCol, s[1]);
+        for (int[] e: stones) {
+            maxRow = Math.max(maxRow, e[0]);
+            maxCol = Math.max(maxCol, e[1]);
         }
 
         DSU uf = new DSU(maxRow + 1 + maxCol + 1);
 
-        for (int[] s: stones) {
-            int x = s[0];
-            int y = s[1] + maxRow + 1;
-
+        for (int[] e: stones) {
+            int x = e[0];
+            int y = maxRow + 1 + e[1];
             uf.union(x, y);
         }
 
-        // Initially we have max row + call + 2 unique notes in the Union-Find. But we are going to combine some of the notes, that is, rows and columns. But in the end we won't touch some rows and columns in the Union-Find cause there aren't stones, so they will live as separate nodes. But we only want the component where things are connected. Therefore we iterate and try to find the unique items instead of just calling uf.sets 
-        HashSet<Integer> uniqueComp = new HashSet<>();
-        for (int[] s: stones) uniqueComp.add(uf.find(s[0]));
+        // Initially we have max row + call + 2 unique notes in the Union-Find. But we are going to combine some of 
+        // the notes, that is, rows and columns. But in the end we won't touch some rows and columns in the     
+        // Union-Find cause there aren't stones, so they will live as separate nodes. But we only want the 
+        // component where things are connected. Therefore we iterate and try to find the unique items instead of 
+        // just calling uf.sets 
 
-        return stones.length - uniqueComp.size();
+        // Here we iterate through only the stones so the nodes which persisted in the uf due to no stones in them
+        // won't be called and effect the set size.
+        HashSet<Integer> set = new HashSet<>();
+        for (int[] s: stones) {
+            set.add(uf.find(s[0])); // using s[1] will result the same as they are already connected
+        }
+
+        return stones.length - set.size();
     }
 }
 

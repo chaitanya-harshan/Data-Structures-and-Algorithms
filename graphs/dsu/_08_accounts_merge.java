@@ -1,37 +1,52 @@
 package graphs.dsu;
 
-public class accounts_merge {
+import java.util.*;
+
+public class _08_accounts_merge {
+    // each person as connected_component: each mail of a person is a node and forms a edge from 
+    // person -> their_mail
+    // some nodes/mails are shared by multiple nodes/persons
+    // we need to combine nodes/persons based on common mails to form connected components
+    // -- commmon mails have multiple parents
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
         int n = accounts.size();
-        HashMap<String, Integer> mailMap = new HashMap<>();
+        // we use map to remember in which component was the node/mail present before
+        HashMap<String, Integer> mailEdgesMap = new HashMap<>();
         DSU uf = new DSU(n);
 
         for (int i=0; i<n; i++) {
-            for (int j=1; j<accounts.get(i).size(); j++) {
+            // mails start from j=1
+            for (int j=1; j < accounts.get(i).size(); j++) {
                 String mail = accounts.get(i).get(j);
-                
-                if (!mailMap.containsKey(mail)) mailMap.put(mail, i);
-                else uf.union(i, mailMap.get(mail));
+                // creating an edge
+                if (!mailEdgesMap.containsKey(mail)) mailEdgesMap.put(mail, i);
+                // common node found - if map contains node/mail then this node is connected to
+                // another component so we need to merge the components
+                else uf.union(i, mailEdgesMap.get(mail));
             }
         }
 
         List<String>[] merged = new ArrayList[n];
         for (int i=0; i<n; i++) merged[i] = new ArrayList<>();
+        // iterating throught the edges and creating a connected component graph-ish
+        for (Map.Entry<String, Integer> e: mailEdgesMap.entrySet()) {
+            String mail = e.getKey();
+            int immediateParent = e.getValue();
 
-        for (Map.Entry<String, Integer> e: mailMap.entrySet()) {
-            int p = uf.find(e.getValue());
-            merged[p].add(e.getKey());
+            int actualParent = uf.find(immediateParent);
+            merged[actualParent].add(mail);
         }
 
         List<List<String>> res = new ArrayList<>();
-
         for (int i=0; i<n; i++) {
-            if (merged[i].size() == 0) continue;
-            Collections.sort(merged[i]);
+            List<String> list = merged[i];
+            // these mails are added/combined into another person
+            if (list.size() == 0) continue;
 
+            Collections.sort(list);
             String name = accounts.get(i).get(0);
-            merged[i].add(0, name);
-            res.add(new ArrayList<>(merged[i]));
+            list.add(0, name);
+            res.add(new ArrayList<>(list));
         }
         return res;
     }
@@ -57,11 +72,11 @@ class DSU {
         return parent[i] = find(parent[i]);
     }
 
-    void union(int i, int j) {
+    boolean union(int i, int j) {
         int pi = find(i);
         int pj = find(j);
 
-        if (pi == pj) return;
+        if (pi == pj) return false;
 
         if (size[pi] < size[pj]) {
             parent[pi] = pj;
@@ -72,6 +87,7 @@ class DSU {
         }
 
         sets--;
+        return true;
     }
 }
 

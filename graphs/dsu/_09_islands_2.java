@@ -1,9 +1,9 @@
 package graphs.dsu;
 
-public class islands_2 {
+public class _09_islands_2 {
     public static int[] numOfIslandsII(int n, int m, int[][] queries) {
         DSU uf = new DSU(n*m);
-        boolean[][] visited = new boolean[n][m];
+        boolean[][] land = new boolean[n][m];
         int islands = 0;
         int[] ans = new int[queries.length];
         int idx = 0;
@@ -13,19 +13,20 @@ public class islands_2 {
 
         for (int[] q: queries) {
             int i = q[0], j = q[1];
-            if (visited[i][j]) {
+            if (land[i][j]) {
                 ans[idx++] = islands;
                 continue;
             }
+
+            land[i][j] = true;
             islands++;
-            visited[i][j] = true;
 
             for (int d=0; d<4; d++) {
                 int r = i + dr[d];
                 int c = j + dc[d];
                 if (!isValid(r,c,n,m)) continue;
 
-                if ((visited[r][c]) && uf.find(i*m+j) != uf.find(r*m+c)) {
+                if ((land[r][c]) && uf.find(i*m+j) != uf.find(r*m+c)) {
                     islands--;
                     uf.union(i*m+j, r*m+c);
                 }

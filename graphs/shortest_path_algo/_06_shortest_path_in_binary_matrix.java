@@ -2,7 +2,7 @@ package graphs.shortest_path_algo;
 
 import java.util.*;
 
-public class _04_shortest_path_in_binary_matrix {
+public class _06_shortest_path_in_binary_matrix {
     public int shortestPathBinaryMatrix(int[][] grid) {
         if (grid[0][0] == 1) return -1;
         int n = grid.length;

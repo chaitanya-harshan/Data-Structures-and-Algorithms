@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class _mst_dsu {
+public class _05_kruskal_mst_adj_list_creation {
     public int spanningTree(int V, int[][] edges) {
         // Step 1: Sort all edges in non-decreasing order of their weight.
         Arrays.sort(edges, Comparator.comparingInt(a -> a[2]));

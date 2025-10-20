@@ -7,9 +7,7 @@ public class _03_detect_cycle_directed_graph_bfs_khans {
     // BFS (Khan's Algorithm)
     public boolean detectCycleInDirectedGraph(int n, ArrayList<ArrayList<Integer>> edges) {
         List<Integer>[] adj = new ArrayList[n + 1];
-        for (int i = 1; i <= n; i++) {
-            adj[i] = new ArrayList<>();
-        }
+        for (int i = 1; i <= n; i++) adj[i] = new ArrayList<>();
         int[] inDegree = new int[n + 1];
         for (List<Integer> e : edges) {
             adj[e.get(0)].add(e.get(1));
@@ -17,11 +15,7 @@ public class _03_detect_cycle_directed_graph_bfs_khans {
         }
 
         Queue<Integer> q = new LinkedList<>();
-        for (int i = 1; i <= n; i++) {
-            if (inDegree[i] == 0) {
-                q.offer(i);
-            }
-        }
+        for (int i = 1; i <= n; i++) if (inDegree[i] == 0) q.offer(i);
         int topoCnt = 0;
 
         while (!q.isEmpty()) {

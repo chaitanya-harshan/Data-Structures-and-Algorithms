@@ -52,7 +52,7 @@ public class _06_find_eventual_safe_states {
     // gemini/striver -- similar to mine from below but clean
     public List<Integer> eventualSafeNodes_dfs1(int[][] graph) {
         int n = graph.length;
-        int[] color = new int[n];
+        int[] color = new int[n]; // using color instead of (path & visited)
 
         for (int i=0; i<n; i++) {
             if (color[i] == 0) dfs(i, graph, color); 
@@ -111,9 +111,14 @@ public class _06_find_eventual_safe_states {
 
 802. Find Eventual Safe States
 
-There is a directed graph of n nodes with each node labeled from 0 to n - 1. The graph is represented by a 0-indexed 2D integer array graph where graph[i] is an integer array of nodes adjacent to node i, meaning there is an edge from node i to each node in graph[i].
-A node is a terminal node if there are no outgoing edges. A node is a safe node if every possible path starting from that node leads to a terminal node (or another safe node).
-Return an array containing all the safe nodes of the graph. The answer should be sorted in ascending order.
+There is a directed graph of n nodes with each node labeled from 0 to n - 1. 
+The graph is represented by a 0-indexed 2D integer array graph where graph[i] is an integer array 
+of nodes adjacent to node i, meaning there is an edge from node i to each node in graph[i].
+A node is a terminal node if there are no outgoing edges. 
+A node is a safe node if every possible path starting from that node leads to a terminal node 
+(or another safe node).
+Return an array containing all the safe nodes of the graph. 
+The answer should be sorted in ascending order.
 
  
 Example 1:

@@ -1,33 +1,40 @@
 package graphs.shortest_path_algo;
 
+import java.util.Arrays;
+
 public class _13_city_with_smallest_no_nei_under_threshold_dist {
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {
+        int inf = Integer.MAX_VALUE;
         int[][] dist = new int[n][n];
-        for (int[] row: dist) Arrays.fill(row, (int)1e9);
+        for (int[] row: dist) Arrays.fill(row, inf);
         for (int[] e: edges) {
             dist[e[0]][e[1]] = e[2];
             dist[e[1]][e[0]] = e[2];
         }
-        for (int i=0; i<n; i++) dist[i][i] = 0;
 
+        // k --> via node
         for (int k=0; k<n; k++) {
             for (int i=0; i<n; i++) {
                 for (int j=0; j<n; j++) {
-                    if (dist[i][k] == 1e9 || dist[k][j] == 1e9) continue;
-                    dist[i][j] = Math.min(dist[i][j],  dist[i][k] + dist[k][j]);
+                    
+                    if (i == j) continue;
+                    if (dist[i][k] == inf || dist[k][j] == inf) continue;
+
+                    dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
                 }
             }
         }
 
-        int city = 0, minCnt = n;
-        for (int c = 0; c<n; c++) {
+        int  city = 0, min = inf; // or min = n;
+        for (int i=0; i<n; i++) {
             int cnt = 0;
-            for (int nei=0; nei<n; nei++) {
-                if (dist[c][nei] <= distanceThreshold) cnt++;
+            for (int j=0; j<n; j++) {
+                if (dist[i][j] <= distanceThreshold) cnt++;
             }
-            if (cnt <= minCnt) {
-                minCnt = cnt;
-                city = c;
+
+            if (cnt <= min) {
+                city = i;
+                min = cnt;
             }
         }
         return city;
