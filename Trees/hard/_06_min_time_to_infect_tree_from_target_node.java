@@ -77,7 +77,8 @@ public class _06_min_time_to_infect_tree_from_target_node {
 
 2385. Amount of Time for Binary Tree to Be Infected
 
-You are given the root of a binary tree with unique values, and an integer start. At minute 0, an infection starts from the node with value start.
+You are given the root of a binary tree with unique values, and an integer start. 
+At minute 0, an infection starts from the node with value start.
 Each minute, a node becomes infected if:
 The node is currently uninfected.
 The node is adjacent to an infected node.

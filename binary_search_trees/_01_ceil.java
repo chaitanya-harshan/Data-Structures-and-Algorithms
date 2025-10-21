@@ -26,4 +26,7 @@ https://www.naukri.com/code360/problems/ceil-from-bst_920464
 
 Ceil Value Node: Node with the smallest data larger than or equal to the key value.
 If a particular floor or ceil value is not present then output -1.
+
+arr[] = {1, 2, 5, 7, 8, 9}, key = 3.
+The closest integer greater than 3 in the given array is 5. So, its ceil value in the given array is 5.
  */

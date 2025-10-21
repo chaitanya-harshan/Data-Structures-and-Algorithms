@@ -32,7 +32,8 @@ public class _09_construct_B_T_from_in_and_preOrder_traversal {
 
 105. Construct Binary Tree from Preorder and Inorder Traversal
 
-Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree 
+and inorder is the inorder traversal of the same tree, construct and return the binary tree. 
 
  
 Example 1:

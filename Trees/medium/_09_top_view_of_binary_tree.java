@@ -26,16 +26,10 @@ public class _09_top_view_of_binary_tree {
             
             // The core logic: If this horizontal distance has NOT been seen before,
             // then this node is the highest one, so add it to the map.
-            if (!map.containsKey(x)) {
-                map.put(x, node.val);
-            }
+            if (!map.containsKey(x)) map.put(x, node.val);
             
-            if (node.left != null) {
-                q.add(new Pair(node.left, x-1));
-            }
-            if (node.right != null) {
-                q.add(new Pair(node.right, x+1));
-            }
+            if (node.left != null) q.add(new Pair(node.left, x-1));
+            if (node.right != null) q.add(new Pair(node.right, x+1));
         }
         
         result.addAll(map.values());        

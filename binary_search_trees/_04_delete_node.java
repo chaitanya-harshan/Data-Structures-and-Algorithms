@@ -12,14 +12,14 @@ public class _04_delete_node {
                     cur.left = helper(cur.left);
                     break;
                 }
-                else cur = cur.left;
+                cur = cur.left;
             }
             else {
                 if (cur.right != null && cur.right.val == key) {
                     cur.right = helper(cur.right);
                     break;
                 }
-                else cur = cur.right;
+                cur = cur.right;
             }
         }
         return root;

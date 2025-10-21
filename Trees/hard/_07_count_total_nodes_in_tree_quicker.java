@@ -7,7 +7,7 @@ public class _07_count_total_nodes_in_tree_quicker {
         int left = leftDepth(root);
         int right = rightDepth(root);
 
-        // if (left == right) return (1 << left)-1;
+        // if (left == right) return (1 << left)-1; // if left = left+1 (depth inc root)
         if (left == right) return (2 << left)-1;
 
         return 1 + countNodes(root.left) + countNodes(root.right);
