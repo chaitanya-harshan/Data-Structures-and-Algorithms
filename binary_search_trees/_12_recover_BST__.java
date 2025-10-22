@@ -47,7 +47,8 @@ public class _12_recover_BST__ {
 
 99. Recover Binary Search Tree
 
-You are given the root of a binary search tree (BST), where the values of exactly two nodes of the tree were swapped by mistake. Recover the tree without changing its structure.
+You are given the root of a binary search tree (BST), where the values of exactly two nodes 
+of the tree were swapped by mistake. Recover the tree without changing its structure.
 
  
 Example 1:

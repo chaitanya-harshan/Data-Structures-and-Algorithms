@@ -20,18 +20,18 @@ public class _08_construct_BST_from_preOrder {
     //-------------------------------------------------------------------------------------
 
     public TreeNode bstFromPreorder1(int[] preorder) {
-        return build(0, preorder.length-1, preorder);
+        return build(preorder, 0, preorder.length-1);
     }
 
-    TreeNode build(int s, int e, int [] preorder) {
+    TreeNode build(int[] preorder, int s, int e) {
         if (s > e) return null;
 
         TreeNode root = new TreeNode(preorder[s]);
-        int i = s+1;
-        while (i <= e && preorder[i] < preorder[s]) i++;
+        int idx = s+1;
+        while (idx <= e && preorder[idx] < preorder[s]) idx++;
 
-        root.left = build(s+1, i-1, preorder);
-        root.right = build(i, e, preorder);
+        root.left = build(preorder, s+1, idx-1);
+        root.right = build(preorder, idx, e);
         return root;
     }
 }
@@ -41,10 +41,14 @@ public class _08_construct_BST_from_preOrder {
 
 1008. Construct Binary Search Tree from Preorder Traversal
 
-Given an array of integers preorder, which represents the preorder traversal of a BST (i.e., binary search tree), construct the tree and return its root.
-It is guaranteed that there is always possible to find a binary search tree with the given requirements for the given test cases.
-A binary search tree is a binary tree where for every node, any descendant of Node.left has a value strictly less than Node.val, and any descendant of Node.right has a value strictly greater than Node.val.
-A preorder traversal of a binary tree displays the value of the node first, then traverses Node.left, then traverses Node.right.
+Given an array of integers preorder, which represents the preorder traversal of a BST (i.e., binary search tree), 
+construct the tree and return its root.
+It is guaranteed that there is always possible to find a binary search tree with the given requirements for 
+the given test cases.
+A binary search tree is a binary tree where for every node, any descendant of Node.left has a value strictly 
+less than Node.val, and any descendant of Node.right has a value strictly greater than Node.val.
+A preorder traversal of a binary tree displays the value of the node first, then traverses Node.left, 
+then traverses Node.right.
 
  
 Example 1:

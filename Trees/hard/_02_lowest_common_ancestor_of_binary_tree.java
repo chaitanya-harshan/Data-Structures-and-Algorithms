@@ -1,6 +1,8 @@
 package Trees.hard;
 
 public class _02_lowest_common_ancestor_of_binary_tree {
+    // thought process - bubbling up the node to the top if u found the node else 
+    // bubbling up null to denote we couldnt find any
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
 

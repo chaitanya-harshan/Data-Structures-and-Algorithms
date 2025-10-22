@@ -37,9 +37,8 @@ class Node {
 /*
  * https://www.naukri.com/code360/problems/largest-bst-subtree_893103
  * 
- * You have been given a Binary Tree of 'N' nodes, where the nodes have integer values. Your task is to return the size of the largest subtree of the binary tree which is also a BST.
-
-
+ * You have been given a Binary Tree of 'N' nodes, where the nodes have integer values. 
+ * Your task is to return the size of the largest subtree of the binary tree which is also a BST.
 
 A binary search tree (BST) is a binary tree data structure which has the following properties.
 

@@ -145,7 +145,8 @@ public class _10_merge_BST_leetcode_1932 {
 
 1932. Merge BSTs to Create Single BST
 
-You are given n BST (binary search tree) root nodes for n separate BSTs stored in an array trees (0-indexed). Each BST in trees has at most 3 nodes, and no two roots have the same value. In one operation, you can:
+You are given n BST (binary search tree) root nodes for n separate BSTs stored in an array trees (0-indexed). 
+Each BST in trees has at most 3 nodes, and no two roots have the same value. In one operation, you can:
 Select two distinct indices i and j such that the value stored at one of the leaves of trees[i] is equal to the root value of trees[j].
 Replace the leaf node in trees[i] with trees[j].
 Remove trees[j] from trees.

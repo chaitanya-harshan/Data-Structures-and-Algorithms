@@ -6,13 +6,13 @@ public class _10_BST_Iterator {
     class BSTIterator{
         Stack<TreeNode> st = new Stack<>();
         
-        public BSTIterator(TreeNode root) {
+        BSTIterator(TreeNode root) {
             pushAll(root);
         }
         
         public int next() {
             TreeNode node = st.pop();
-            if (node.right == null) return node.val;
+            // if (node.right == null) return node.val;
             pushAll(node.right);
             return node.val;
         }
