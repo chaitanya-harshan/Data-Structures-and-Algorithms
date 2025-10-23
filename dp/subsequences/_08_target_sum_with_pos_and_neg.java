@@ -23,8 +23,7 @@ public class _08_target_sum_with_pos_and_neg {
 
             for (int k=0; k<=target; k++) {
                 int noTake = prev[k];
-                int take = 0;
-                if (num <= k) take = prev[k-num];
+                int take = (num <= k) ? prev[k-num] : 0;
                 dp[k] = take+noTake;
             }
             prev = dp;
@@ -39,8 +38,10 @@ public class _08_target_sum_with_pos_and_neg {
 494. Target Sum
 
 You are given an integer array nums and an integer target.
-You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer in nums and then concatenate all the integers.
-For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
+You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer 
+in nums and then concatenate all the integers.
+For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build 
+the expression "+2-1".
 Return the number of different expressions that you can build, which evaluates to target.
 
  

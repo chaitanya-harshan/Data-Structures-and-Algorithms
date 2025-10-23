@@ -5,14 +5,18 @@ public class _11_rod_cutting_unbounded_knapsack {
     // meaning in psudocode arr[2] is price of length 2
     // but in code it's arr[2-1] to get te 2nd element which is index 1
     // DONT GET CONFUSED
-    public static int cutRod(int[] price) {
+
+    // ts-ntn
+    // take stay - noTake next
+    // think recursion first then come to dp ---- trust me dude
+    public static int cutRod_2d_dp(int[] price) {
         int n = price.length;
         int[] prev = new int[n+1];
         prev[0] = 0;
         
         for (int i=n; i > 0; i--) {
             int[] dp = new int[n+1];
-
+            
             for (int k=0; k<=n; k++) {
                 int noTake = prev[k];
                 int take = (i <= k) ? price[i-1] + dp[k-i] : 0;
@@ -23,12 +27,32 @@ public class _11_rod_cutting_unbounded_knapsack {
         }
         return prev[n];
     }
+
+    public static int cutRod_1d_dp(int[] price) {
+        int n = price.length;
+
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+
+        for (int k = 1; k <= n; k++) {
+            for (int cut=1; cut<=n; cut++) {
+                if (cut <= k) {
+                    dp[k] = Math.max(dp[k],  price[cut-1] + dp[k-cut]);
+                } 
+                else break;
+            }
+        }
+        return dp[n];
+    }
+
 }
 
 /*
- * Given a rod of length n inches and an array of prices, price. price[i] denotes the value of a piece of length i. Determine the maximum value obtainable by cutting up the rod and selling the pieces.
 https://www.geeksforgeeks.org/problems/rod-cutting0840/1
 https://www.naukri.com/code360/problems/rod-cutting-problem_800284
+
+ * Given a rod of length n inches and an array of prices, price. price[i] denotes the value of a piece 
+ * of length i. Determine the maximum value obtainable by cutting up the rod and selling the pieces.
 
 Example:
 

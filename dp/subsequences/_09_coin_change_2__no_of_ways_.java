@@ -26,8 +26,7 @@ public class _09_coin_change_2__no_of_ways_ {
     }
 
     public static int change_recursion(int amount, int[] coins) {
-        int n =  coins.length;
-        int[][] dp = new int[n][amount+1];
+        int[][] dp = new int[coins.length][amount+1];
         Arrays.stream(dp).forEach(row -> Arrays.fill(row,-1));
 
         return backtrack(0,amount, coins, dp);
@@ -53,8 +52,10 @@ URL: https://leetcode.com/problems/coin-change-ii/description/
 
 518. Coin Change II
 
-You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
-Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.
+You are given an integer array coins representing coins of different denominations and an integer amount 
+representing a total amount of money.
+Return the number of combinations that make up that amount. If that amount of money cannot be made up 
+by any combination of the coins, return 0.
 You may assume that you have an infinite number of each kind of coin.
 The answer is guaranteed to fit into a signed 32-bit integer.
 

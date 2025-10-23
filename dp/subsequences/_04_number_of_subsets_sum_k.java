@@ -20,6 +20,7 @@ public class _04_number_of_subsets_sum_k {
 	            int notTaken = prev[k];
 	            int taken = 0;
 	            if (num <= k) taken = prev[k-num];
+
 	            dp[k] = (notTaken + taken)%MOD;
 	        }
 			prev = dp;
@@ -32,19 +33,20 @@ public class _04_number_of_subsets_sum_k {
     // ********* Recursion **********
 
     static int subsetsWithSumK1(int[] nums, int sum) {
-        int cnt = backtrack(0, sum, nums, nums.length);
+        int cnt = backtrack(0, 0, sum, nums, nums.length);
         return cnt % MOD;
     }
-    static int backtrack(int i, int k, int[] nums, int n) {
-        // if (k == 0) return 1; // cause u also have '0's in the array so [5] & [5,0] count as 2 subsets
-        if (k < 0) return 0;
-        if (i == n ) {
-            if ( k == 0) return 1;
+    static int backtrack(int i, int k, int sum, int[] nums, int n) {
+        // if (k == sum) return 1; 
+        // *** U can't cause u also have '0's in the array so [5] & [5,0] count as 2 subsets
+        if (k > sum) return 0;
+        if (i == n) {
+            if (k == sum) return 1;
             else return 0;
         }
-        int left = backtrack(i+1, k-nums[i], nums, n);
-        int right = backtrack(i+1, k, nums, n);
-        return (left + right) % MOD;
+        int noTake = backtrack(i+1, k        , sum, nums, n);
+        int take =   backtrack(i+1, k+nums[i], sum, nums, n);
+        return (noTake + take) % MOD;
     }
 }
 
@@ -54,7 +56,8 @@ https://www.naukri.com/code360/problems/count-subsets-with-sum-k_3952532
 
 Problem statement
 You are given an array 'arr' of size 'n' containing positive integers and a target sum 'k'.
-Find the number of ways of selecting the elements from the array such that the sum of chosen elements is equal to the target 'k'.
+Find the number of ways of selecting the elements from the array such that the sum of chosen 
+elements is equal to the target 'k'.
 Since the number of ways can be very large, print it modulo 10 ^ 9 + 7.
 
 

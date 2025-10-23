@@ -2,7 +2,7 @@ package dp.subsequences;
 
 public class _10_unbounded_knapsack_duplicate {
     
-    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+    public static int unboundedKnapsack_2d_dp(int n, int w, int[] profit, int[] weight) {
         int[] prev = new int[w+1];
         prev[0] = 0;
 
@@ -18,6 +18,29 @@ public class _10_unbounded_knapsack_duplicate {
             prev = dp;
         }
         return prev[w];
+    }
+
+    public static int unboundedKnapsack_1d_dp(int n, int w, int[] profit, int[] weight) {
+        int[] dp = new int[w + 1];
+        dp[0] = 0; // zero profit for when 0 capacity is left
+
+        // u can sort it like in minCoins and make it effecient but this is 2 array input so
+        // it's extra work.... u can do it if u want
+
+        for (int k = 1; k <= w; k++) {
+            for (int i = 0; i < n; i++) {
+                if (weight[i] <= k) {
+                    // This is the key transition, directly parallel to Code 2.
+                    // We either:
+                    // 1. Don't take item i (dp[k] keeps its current value)
+                    // 2. Take item i (profit[i] + dp[k - weight[i]])
+                    dp[k] = Math.max(dp[k], profit[i] + dp[k - weight[i]]);
+                }
+                // incase u sorted it:
+                // else break;
+            }
+        }
+        return dp[w];
     }
     
     // gfg

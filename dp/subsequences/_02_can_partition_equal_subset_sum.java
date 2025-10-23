@@ -13,7 +13,7 @@ public class _02_can_partition_equal_subset_sum {
         System.out.println(canPartition(nums));
     }
 
-    public boolean canPartition(int[] nums) {
+    public static boolean canPartition(int[] nums) {
         // ******* USE the comments code for consistency with the other problems *********
         int n = nums.length;
         int sum = Arrays.stream(nums).sum();
@@ -21,20 +21,20 @@ public class _02_can_partition_equal_subset_sum {
         else sum = sum/2;
 
         boolean[] prev = new boolean[sum+1];
-        // prev[0] = true;
+        prev[0] = true;
         
         for (int i=n-1; i>=0; i--) {
             boolean[] dp = new boolean[sum+1];
             int num = nums[i];
 
-            // for (int j=0; j<=sum; j++) {
-            for (int j=1; j<=sum; j++) {
-                if (j == num || prev[j]) dp[j] = true;
-                else if (j > num && prev[j-num]) dp[j] = true;
-                // boolean noTake = prev[j];
-                // boolean take = false;
-                // if (num <= j) take = prev[j-num];
-                // dp[j] = noTake || take;
+            for (int j=0; j<=sum; j++) {
+            // for (int j=1; j<=sum; j++) {
+                // if (j == num || prev[j]) dp[j] = true;
+                // else if (j > num && prev[j-num]) dp[j] = true;
+                boolean noTake = prev[j];
+                boolean take = false;
+                if (num <= j) take = prev[j-num];
+                dp[j] = noTake || take;
             }
             prev = dp;
         }
@@ -63,7 +63,8 @@ public class _02_can_partition_equal_subset_sum {
 /*
  * 416. Partition Equal Subset Sum
  * https://leetcode.com/problems/partition-equal-subset-sum/description/
-Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
+Given an integer array nums, return true if you can partition the array into two subsets such that the sum 
+of the elements in both subsets is equal or false otherwise.
 
  
 

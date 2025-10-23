@@ -8,7 +8,6 @@ public class _06_subsets_sum_exists {
     }
 
     public static boolean isSubsetPresent(int n, int k, int[] nums) {
-        // Write your code here
         return backtrack(nums, 0, 0, k, n); // k is sum not index
     }
     
@@ -18,14 +17,13 @@ public class _06_subsets_sum_exists {
         if (i == n) {
             return s == sum;
         }
+        // if (dp[i][s]) return true;
         
-        s += nums[i];
-        if (backtrack(nums, i+1, s, sum, n)) return true;
-        s -= nums[i];
-        
-        if (backtrack(nums, i+1, s, sum, n)) return true;
+        boolean noTake = backtrack(nums, i+1, s, sum, n);
+        boolean take = backtrack(nums, i+1, s+nums[i], sum, n);
 
-        return false;
+        return take || noTake;
+        // return dp[i][s] = take || noTake;
     }
 }
 

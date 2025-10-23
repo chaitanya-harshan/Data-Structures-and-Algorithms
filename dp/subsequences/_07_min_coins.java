@@ -4,9 +4,28 @@ import java.util.Arrays;
 
 public class _07_min_coins {
 
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange_2d_dp(int[] coins, int amount) {
         int n = coins.length;
-        Arrays.sort(coins);
+        int[] prev = new int[amount+1];
+        prev[0] = 0;
+
+        for (int i=n-1; i>=0; i--) {
+            int[] dp = new int[amount + 1];
+            int num = coins[i];
+
+            for (int k=0; k<= amount; k++) {
+                int noTake = prev[k];
+                int take = (num <= k) ? 1+dp[k-num] : 0;
+                dp[k] = Math.min(noTake, take);
+            }
+            prev = dp;
+        }
+        return prev[amount];
+    }
+
+    public int coinChange_1d_dp(int[] coins, int amount) {
+        int n = coins.length;
+        Arrays.sort(coins); // u don't really need to sort it
 
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1); // can't use Integer.MAX_VALUE as you'll do 1+dp[prev]
@@ -16,9 +35,8 @@ public class _07_min_coins {
             for (int coin : coins) {
                 if (coin <= i) {
                     dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
-                } else {
-                    break;
-                }
+                } 
+                else break;
             }
         }
         return dp[amount] == amount + 1 ? -1 : dp[amount];
@@ -56,8 +74,10 @@ public class _07_min_coins {
 
 322. Coin Change
 
-You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
-Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+You are given an integer array coins representing coins of different denominations and an integer amount 
+representing a total amount of money.
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be 
+made up by any combination of the coins, return -1.
 You may assume that you have an infinite number of each kind of coin.
 
  
