@@ -9,16 +9,28 @@ public class _06_rotate_arr__d_places {
         reverse(nums, k, nums.length-1);
     }
 
-    public void reverse(int[] arr, int low, int high) {
-        if (low >= high) return;
+    public void reverse(int[] arr, int l, int h) {
+        if (l >= h) return;
 
-        int mid = (low + high)/2;
-        while(low <= mid) {
-            int temp = arr[low];
-            arr[low] = arr[high];
-            arr[high] = temp;
-            low++;
-            high--;
+        // int mid = (l + h)/2;
+        // while(l <= mid) {
+        while(l <= h) {
+            int temp = arr[l];
+            arr[l] = arr[h];
+            arr[h] = temp;
+
+            l++;
+            h--;
         }
     }
 }
+
+
+// Given: --> ==>
+// Want:  ==> -->
+
+// --> ==> - start
+// <-- ==>
+// <-- <==
+
+// ==> --> - end

@@ -16,8 +16,7 @@ public class _13_longSubArrSumK {
         System.out.println(getLongestSubArr(arr2, 15)); // ans = 5 which is correct 
     }
 
-    // Optimal for array which contains +ve -ve and zeros
-
+    // for array which contains +ve & -ve and zeros
     static int getLongestSubArr(int[] arr, int k) {
         HashMap<Integer,Integer> map = new HashMap<>();
         int sum = 0;
@@ -36,21 +35,45 @@ public class _13_longSubArrSumK {
         return maxLength;
     }
 
-    // Optimal if Array has positive and zeros only
+    // if Array has only +ve & zeros only
+    static int getLongestSubArr1( int[] arr, int k) {
+        int l = 0;
+        int sum = 0, max = 0;
 
-     static int getLongestSubArr1( int[] arr, int k) {
-        int low = 0;
-        int sum = 0;
-        int maxLength = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            while (sum > k && low <= i) {
-                sum -= arr[low];
-                low++;
+        for (int r = 0; r < arr.length; r++) {
+            sum += arr[r];
+            while (sum > k && l <= r) {
+                sum -= arr[l++];
+                l++;
             }
-            if (sum == k) maxLength = Math.max(maxLength, i+1-low);
+
+            if (sum == k) max = Math.max(max, r+1-l);
         }
-        return maxLength;
-     }
+        return max;
+    }
 }
+
+/*
+ * Longest subarray with sum K
+
+Given an array nums of size n and an integer k, find the length of the longest sub-array that sums to k. 
+If no such sub-array exists, return 0.
+
+
+Examples:
+Input: nums = [10, 5, 2, 7, 1, 9],  k=15
+
+Output: 4
+
+Explanation:
+
+The longest sub-array with a sum equal to 15 is [5, 2, 7, 1], which has a length of 4. This sub-array starts at index 1 and ends at index 4, and the sum of its elements (5 + 2 + 7 + 1) equals 15. Therefore, the length of this sub-array is 4.
+
+Input: nums = [-3, 2, 1], k=6
+
+Output: 0
+
+Explanation:
+
+There is no sub-array in the array that sums to 6. Therefore, the output is 0.
+ */
