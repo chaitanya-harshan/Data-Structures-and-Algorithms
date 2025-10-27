@@ -21,6 +21,8 @@ public class _12_rotate_matrix_90 {
     // better method
     static void rotate1(int[][] matrix) {
         int n = matrix.length;
+
+        // Transpose
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n; j++) {
                 int temp = matrix[j][i];
@@ -29,6 +31,7 @@ public class _12_rotate_matrix_90 {
             }
         }
 
+        // Reverse
         for (int[] row : matrix) {
             for (int i = 0; i < row.length/2; i++) {
                 int temp = row[i];
@@ -52,7 +55,6 @@ public class _12_rotate_matrix_90 {
             }
         }
     }
-
 }
 
 //                     (i,j)

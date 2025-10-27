@@ -42,11 +42,11 @@ public class _06_stocks {
         int maxPro = 0;
         int totalProfit = 0;
         for (int i = 0; i< prices.length; i++) {
-            if (prices[i] < prices[buy]) 
-                buy = i;
+            if (prices[i] < prices[buy]) buy = i;
+
             int profit = prices[i] - prices[buy];
-            if (profit > maxPro) 
-                maxPro = profit;
+            maxPro = Math.max(maxPro, profit);
+            
             if (profit < maxPro) {
                 totalProfit += maxPro;
                 maxPro = 0;

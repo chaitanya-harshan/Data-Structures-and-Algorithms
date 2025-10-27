@@ -11,21 +11,21 @@ public class _05_Print_maxSubArr {
 
     static int maxSubArray(int[] nums) {
         int sum = 0;
-        int max = Integer.MIN_VALUE;
-        int low = 0, high = 1;
+        int max = Integer.MIN_VALUE; // or nums[0]
+        int l = 0, r = 1; //??? shouldnt r = 0
 
         for (int i = 0; i < nums.length; i++) {
-            if (sum == 0) low = i;
+            if (sum == 0) l = i;
 
             sum += nums[i];
 
             if (sum > max) {
                 max = sum;
-                high = i;
+                r = i;
             }
             if (sum < 0) sum = 0;
         }
-        for (int i = low; i <= high; i++) {
+        for (int i = l; i <= r; i++) {
             System.out.print(nums[i]+" ");
         }
         return max;

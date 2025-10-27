@@ -1,6 +1,7 @@
 package arrays.medium;
 
 public class _03_majority {
+    // general form of implementing boyce moore ALgo and intuitive(ig)
     public int majorityElement(int[] nums) {
         int ele = nums[0];
         int cnt = 0;
@@ -18,6 +19,24 @@ public class _03_majority {
         for (int i: nums) if (i == ele) cnt++;
         return cnt > nums.length/2 ? ele : -1;
     }
+
+    // less intuitive -- not general code so not suggested to use this
+    public int majorityElement1(int[] nums) {
+        int e = nums[0];
+        int cnt = 0;
+
+        for (int i: nums) {
+            if (e == i) cnt++;
+            else cnt--;
+
+            if (cnt == 0) {
+                e = i;
+                cnt++;
+            }
+        }
+        return e;
+    }
+
 }
 
 /*
@@ -25,7 +44,8 @@ https://leetcode.com/problems/majority-element/
 169 Majority Element
  * Given an array nums of size n, return the majority element.
 
-The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+The majority element is the element that appears more than ⌊n / 2⌋ times. 
+You may assume that the majority element always exists in the array.
 
 Example 1:
 

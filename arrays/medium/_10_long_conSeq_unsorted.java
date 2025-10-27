@@ -1,19 +1,18 @@
 package arrays.medium;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class _10_long_conSeq_unsorted {
     
     public int longestConsecutive(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
-        Arrays.stream(nums).forEach(a -> set.add(a));
+        for (int i: nums) set.add(i);
 
         int max = 0;
-        for (int i = 0; i<nums.length; i++) {
-            int cnt = 1;
-            if (!set.contains(nums[i]-1)) {
-                while (set.contains(nums[i] + cnt) ) cnt++;
+        for (int i: set) { // use set cause nums has duplicates .... Test cases were updated
+            if (!set.contains(i-1)) {
+                int cnt = 0;
+                while (set.contains(i+cnt)) cnt++;
                 max = Math.max(max, cnt);
             }
         }
