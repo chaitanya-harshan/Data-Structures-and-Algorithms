@@ -7,6 +7,8 @@ public class basic_sorts {
         insertion_sort(arr);
         System.out.println(Arrays.toString(arr));
     }
+
+    // unstable because check out 2a,2b, 1 -- it becomes 1,2b, 2a  (a & b postion are altered)
     static void selection_sort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n-1; i++) {
@@ -38,21 +40,18 @@ public class basic_sorts {
         }
     }
 
+    // basically bubbling cur_ele down to the place where it should be in the prefix_sorted array (0 - i)
     static void insertion_sort( int[] arr) {
         int n = arr.length;
         for (int i = 1; i < n; i++) {
-            // int j = i;
-            // while (j > 0 && arr[j] < arr[j-1]) {
-            //     int temp = arr[j-1];
-            //     arr[j-1] = arr[j];
-            //     arr[j] = temp;
-            //     j--;
-            // }
-            for (int j = i; (j>0 && arr[j]< arr[j-1]); j--) {
-                int temp = arr[j-1];
-                arr[j-1] = arr[j];
-                arr[j] = temp;
+            int key = arr[i];
+            int j = i-1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j+1] = arr[j];
+                j--;
             }
+            arr[j+1] = key;
         }
     }
 }

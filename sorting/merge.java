@@ -16,10 +16,10 @@ public class merge {
         int mid = (low + high)/2;
         merge_sort(arr, low, mid);
         merge_sort(arr, mid+1, high);
-        mergeArr(arr, low, mid, high);
+        merge(arr, low, mid, high);
     }
 
-    static void mergeArr(int[] arr, int low, int mid, int high) {
+    static void merge(int[] arr, int low, int mid, int high) {
         ArrayList<Integer> list = new ArrayList<>();
         
         int left = low;

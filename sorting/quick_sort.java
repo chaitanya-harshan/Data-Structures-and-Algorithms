@@ -1,4 +1,4 @@
-package sorting;
+    package sorting;
 
 import java.util.Arrays;
 
@@ -9,33 +9,33 @@ public class quick_sort {
         System.out.println(Arrays.toString(arr));
     }
 
-    static void quick_sort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pivot = partion( arr, low, high);
-            quick_sort(arr, low, pivot-1);
-            quick_sort(arr, pivot+1, high);
-        }
+    public static void quick_sort(int[] arr, int low, int high) {
+        // for single ele arr: recursion call would be q(0,0-1) as p would be 0
+        // so low would be -1 and high would be 0. 
+        // for this case we need to use low >= high and not just low == high
+        if (low >= high) return;
+        int pivot = partition(arr, low, high);
+        quick_sort(arr, low, pivot-1);
+        quick_sort(arr, pivot+1, high);
     }
 
-    static int partion(int[] arr, int low, int high) {
-        int pivot = arr[low];
-        int i = low;
-        int j = high;
-
-        while (i<j) {
-            while (arr[i] <= pivot && i < high) i++;
-            while (arr[j] > pivot && j > low) j--;
-
-            if (i<j) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int l = low;
+        for (int r = low; r < high; r++) {
+            if (arr[r] <= pivot) {
+                swap(l, r, arr);
+                l++;
             }
         }
-        int temp = arr[low];
-        arr[low] = arr[j];
-        arr[j] = temp;
+        swap(l, high, arr);
+        return l;
+        // return l-1 == -1 ? 0 : l-1;
+    }
 
-        return j;
+    private static void swap(int i, int j, int[] arr) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
