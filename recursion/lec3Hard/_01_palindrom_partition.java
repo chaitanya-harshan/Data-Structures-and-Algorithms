@@ -53,7 +53,8 @@ public class _01_palindrom_partition {
 
 131. Palindrome Partitioning
 
-Given a string s, partition s such that every  of the partition is a . Return all possible palindrome partitioning of s.
+Given a string s, partition s such that every substring of the partition is a Palindrome. 
+Return all possible palindrome partitioning of s.
 
  
 Example 1:

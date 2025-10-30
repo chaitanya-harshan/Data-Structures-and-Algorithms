@@ -12,74 +12,87 @@ public class _07_3d_dp_two_friends_collect_chocolates {
     // https://www.geeksforgeeks.org/problems/chocolates-pickup/1 - gfg
 
     // tabulation  (below there is code for memoization)
-    public static int solve(int n, int m, int grid[][]) {
+    public int solve(int n, int m, int g[][]) {
         int[][] prev = new int[m][m];
         
-        for (int i=0; i<m; i++) {
-            for(int j=0; j<m; j++) {
-                if (i==j) prev[i][j] = grid[n-1][i];
-                else prev[i][j] = grid[n-1][i] + grid[n-1][j];
-            }
-        }
-        
-        for (int i=n-2; i>=0; i--) {
+        for (int i=n-1; i>=0; i--) {
             int[][] dp = new int[m][m];
             
-            for (int m1 = 0; m1 < m; m1++) {
-                for (int m2 = 0; m2 < m; m2++) {
-                    int max = 0;
+            for (int j1=0; j1<m; j1++) {
+                for (int j2=0; j2<m; j2++) {
                     
-                    for (int j1 = m1-1; j1 <= m1+1; j1++) {
-                        for (int j2 = m2-1; j2 <= m2+1; j2++) {
-                            if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m) continue;
-                            max = Math.max(prev[j1][j2], max);
+                    int max = 0;
+                    for (int da=j1-1; da<=j1+1; da++) {
+                        for (int db=j2-1; db<=j2+1; db++) {
+                            if (da < 0 || da >= m || db < 0 || db >= m) continue;
+                            
+                            max = Math.max(max, prev[da][db]);
                         }
                     }
+                    if (j1 == j2) max += g[i][j1];
+                    else max += g[i][j1] + g[i][j2];
                     
-                    dp[m1][m2] += max;
-                    if (m1 == m2) dp[m1][m2] += grid[i][m1];
-                    else dp[m1][m2] += grid[i][m1] + grid[i][m2];
+                    dp[j1][j2] = max;
                 }
             }
-            
             prev = dp;
         }
         return prev[0][m-1];
     }
 
 // __________________________________________________________________________________________________________________________________________
-    // Memoization - easier for this problem
-    // https://www.naukri.com/code360/problems/ninja-and-his-friends_3125885
-    public static int maximumChocolates(int n, int m, int[][] grid) {
-		// Write your code here.
-		int[][][] dp = new int[n][m][m];
-		Arrays.stream(dp).forEach(slice -> Arrays.stream(slice).forEach(row -> Arrays.fill(row,-1)));
+// Memoization - easier for this problem
+// https://www.naukri.com/code360/problems/ninja-and-his-friends_3125885
+    public static int maximumChocolates(int n, int m, int[][] g) {
+        int[][][] dp = new int[n+1][m][m];
+        for (int[][] slice : dp) {
+            for (int[] row: slice) Arrays.fill(row,-1);
+        }
+        return backtrack(0, 0, m-1, g, dp);
+    }
 
-		return backtrack(0, 0, m-1, grid, dp, n, m);
-	}
+    private static int backtrack(int i, int j1, int j2, int[][] g, int[][][] dp) {
+        int n = g.length, m = g[0].length;
+        if (i == n) return 0;
+        if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m) return 0;
+        if (dp[i][j1][j2] != -1) return dp[i][j1][j2];
 
-	static int backtrack(int i, int j1, int j2, int[][] grid, int[][][] dp, int n, int m) {
-		if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m)
-			return Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int da = -1; da <= 1; da++) {
+            for (int db = -1; db <= 1; db++) {
+                int next = backtrack(i+1, j1+da, j2+db, g, dp);
+                max = Math.max(max, next);
+            }
+        }
+        if (j1 == j2) max += g[i][j1];
+        else max += g[i][j1] + g[i][j2];
 
-		if (i == n-1) {
-			if (j1 == j2) return grid[i][j1];
-			else return grid[i][j1] + grid[i][j2];
-		}
+        return dp[i][j1][j2] = max;
+    }
+    
+    // __________________________________________________________________________________________________________________________________________
+    // Pure recursion
+    public int maximumChocolates1(int n, int m, int[][] g) {
+        return backtrack(0, 0, g[0].length-1, g);
+    }
 
-		if (dp[i][j1][j2] != -1) return dp[i][j1][j2];
+    private int backtrack(int i, int j1, int j2, int[][] g) {
+        int n = g.length, m = g[0].length;
+        if (i == n) return 0;
+        if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m) return 0;
 
-		int max = Integer.MIN_VALUE;
-		for (int da = -1; da <= 1; da++) {
-			for (int db = -1; db <= 1; db++) {				
-				max = Math.max(max, backtrack(i+1, j1+da, j2+db, grid, dp, n, m));
-			}
-		}
-		if (j1 == j2) max += grid[i][j1];
-		else max += grid[i][j1] + grid[i][j2];
+        int max = Integer.MIN_VALUE;
+        for (int da = -1; da <= 1; da++) {
+            for (int db = -1; db <= 1; db++) {
+                int next = backtrack(i+1, j1+da, j2+db, g);
+                max = Math.max(max, next);
+            }
+        }
+        if (j1 == j2) max += g[i][j1];
+        else max += g[i][j1] + g[i][j2];
 
-		return dp[i][j1][j2] = max;
-	}
+        return max;
+    }
 }
 
 // ************************************************* IF YOUR'E BREAKING YOUR HEAD*******************

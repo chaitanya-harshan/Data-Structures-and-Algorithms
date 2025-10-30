@@ -34,20 +34,43 @@ public class _04_container_with_most_water {
     * - Therefore, we always move the pointer with smaller height
      */
     public int maxArea(int[] height) {
-        int area = 0, max = 0;
-        int l = 0, r = height.length - 1;
+        int n = height.length;
+        int maxArea = 0;
+
+        int l = 0, r = n-1;
+        while (l < r) {
+            int area = Math.min(height[l], height[r]) * (r-l);
+            maxArea = Math.max(maxArea, area);
+
+            if (height[l] <= height[r]) l++;
+            else r--;
+        }
+        return maxArea;
+    }
+
+
+    public int maxArea1(int[] height) {
+        int n = height.length;
+        int leftMax = height[0], rightMax = height[n-1];
+
+        int l = 0, r = n-1;
+        int maxArea = 0;
 
         while (l < r) {
-            area = (r - l) * Math.min(height[l], height[r]);
-            max = Math.max(max, area);
-            // Move pointer with smaller height inward
-            if (height[l] <= height[r]) {
-                l++; 
-            }else {
+            if (leftMax <= rightMax) {
+                int area = leftMax * (r-l);
+                maxArea = Math.max(maxArea, area);
+                l++;
+                leftMax = Math.max(leftMax, height[l]);
+            }
+            else {
+                int area = rightMax * (r-l);
+                maxArea = Math.max(maxArea, area);
                 r--;
+                rightMax = Math.max(rightMax, height[r]);
             }
         }
-        return max;
+        return maxArea;
     }
 }
 

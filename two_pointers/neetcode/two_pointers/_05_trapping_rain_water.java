@@ -3,33 +3,66 @@ package two_pointers.neetcode;
 public class _05_trapping_rain_water {
     
     public int trap(int[] height) {
-        // Tip: maks sure the leftMx & rightMx of the curr i lied on the curr i 
-        // instad of calling max[i+1] or mx[i-1]
         int n = height.length;
+        int leftMax = height[0], rightMax = height[n-1];
+        int l = 0, r = n-1;
+
+        int water = 0;
+        while (l < r) { //
+            if (leftMax <= rightMax) {
+                water += leftMax - height[l];
+                l++;
+                leftMax = Math.max(leftMax, height[l]);
+            }
+            else {
+                water += rightMax - height[r];
+                r--;
+                rightMax = Math.max(rightMax, height[r]);
+            }
+        }
+        return water;
+    }
+
+    public int trap2(int[] height) {
+        int n = height.length;
+        int leftMax = 0, rightMax = 0;
+        int l = 0, r = n-1;
+
+        int water = 0;
+        while (l <= r) {
+            if (leftMax <= rightMax) {
+                leftMax = Math.max(leftMax, height[l]);
+                water += leftMax - height[l];
+                l++;
+            }
+            else {
+                rightMax = Math.max(rightMax, height[r]);
+                water += rightMax - height[r];
+                r--;
+            }
+        }
+        return water;
+    }
+
+    // easier
+    public int trap3(int[] height) {
+        int n = height.length;
+        int[] leftMax = new int[n];
         int[] rightMax = new int[n];
+        int water = 0;
+
         rightMax[n-1] = height[n-1];
         for (int i=n-2; i>=0; i--) {
             rightMax[i] = Math.max(height[i], rightMax[i+1]);
         }
 
-        int water = 0;
-        int leftMax = height[0];
-        for (int i=1; i<n-1; i++) {
-            leftMax = Math.max(leftMax, height[i]);
-            water += Math.min(leftMax, rightMax[i]) - height[i];
+        leftMax[0] = height[0];
+        for (int i=1; i<n; i++) {
+            leftMax[i] = Math.max(height[i], leftMax[i-1]);
+
+            water += Math.min(leftMax[i], rightMax[i]) - height[i];
         }
         return water;
-        
-        // This gives very bad time complexity. ig because of math.mx(,0)
-        // int Totalwater = 0;
-        // int leftMax = height[0];
-        // for (int i = 1; i < n-1; i++) {
-        //     int water = Math.min(leftMax, rightMax[i+1]) - height[i];
-        //     Totalwater += Math.max(water, 0);
-        //     leftMax = Math.max(leftMax, height[i]);
-        // }
-        // return Totalwater;
-
     }
 }
 

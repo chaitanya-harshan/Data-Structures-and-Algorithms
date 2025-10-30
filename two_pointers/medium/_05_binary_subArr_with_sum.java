@@ -1,29 +1,37 @@
 package two_pointers_sliding_window.medium;
 
 // similar to that weird string problem
+
+import java.util.HashMap;
+
 public class _05_binary_subArr_with_sum {
 
-    public static void main(String[] args) {
-        int[] nums = {0,0,0,0,0};
-        System.out.println(numSubarraysWithSum(nums, 0));
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int cnt = 0, sum = 0;
+
+        for (int i : nums) {
+            sum += i;
+            if (sum == goal) cnt++;
+            if (map.containsKey(sum - goal)) cnt += map.get(sum-goal);
+            map.put(sum, map.getOrDefault(sum,0) + 1);
+        }
+        return cnt;
     }
 
-    public static int numSubarraysWithSum(int[] nums, int goal) {
-        return subArrSumLessOrEqThan(nums, goal) - subArrSumLessOrEqThan(nums, goal-1);
+    public int numSubarraysWithSum1(int[] nums, int goal) {
+        return subArrSumLessOrEqual(nums, goal) - subArrSumLessOrEqual(nums, goal-1);
     }
 
-    static int subArrSumLessOrEqThan(int[] nums, int goal) {
-        if (goal < 0) return 0;
+    private int subArrSumLessOrEqual(int[] nums, int goal) {
+        int sum = 0, cnt = 0;
         int l = 0;
-        int cnt = 0;
-        int sum = 0;
 
         for (int r=0; r<nums.length; r++) {
             sum += nums[r];
 
-            while (sum > goal) {
-                sum -= nums[l];
-                l++;
+            while (l < r && sum > goal) {
+                sum -= nums[l++];
             }
 
             if (sum <= goal) cnt += r-l+1;

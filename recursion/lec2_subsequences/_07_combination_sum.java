@@ -47,19 +47,35 @@ public class _07_combination_sum {
     }
 
     public void backtrack(int i, int sum, ArrayList<Integer> list) {
-        if (i == candidates.length) return;
+        if (sum > target) return;
         if (sum == target) {
             res.add(new ArrayList<>(list));
             return;
         }
+        if (i == candidates.length) return;
 
-        // no take & move to next 
+        // no take & move to next
         backtrack(i+1, sum, list);
 
         // take and stay
-        if (sum + candidates[i] <= target) {
+        // if (sum + candidates[i] <= target) {
             list.add(candidates[i]);
             backtrack(i, sum+candidates[i], list);
+            list.removeLast();
+        // }
+    }
+
+    public void backtrack1(int start, int sum, ArrayList<Integer> list) {
+        if (sum == target) {
+            res.add(new ArrayList<>(list));
+            return;
+        }
+        
+        for (int i = start; i < candidates.length; i++) {
+            if (sum + candidates[i] > target) continue;  // or break if array is sorted
+            
+            list.add(candidates[i]);
+            backtrack(i, sum + candidates[i], list);
             list.removeLast();
         }
     }
@@ -79,17 +95,3 @@ public class _07_combination_sum {
 if by adding nums[i] to sum, sum exceeds target then we return
 */
 
-/*
-                                            2 3 6 7
-                                    /----------------+----------------\
-                                -                                      2
-                        /------------\                          /-----------\
-                       -                2                      2              3
-                     /   \            /   \                  /   \          /   \
-                    -      2         2      3               2      3       3      6
-                   / \    / \       / \    / \             / \    / \     / \    / \
-                  -   2  2   3     2   3  3   6           2   3  3   6   3   6  6   7
-
-Path sum =>       0   2  4   5     6   7  8   11          8   9  10  13  11  14 17  18
-
- */

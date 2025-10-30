@@ -38,7 +38,8 @@ public class subArr_sizeK_avg_greater_equal_threshold {
  * 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
 https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
 
-Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold.
+Given an array of integers arr and two integers k and threshold, return the number of sub-arrays 
+of size k and average greater than or equal to threshold.
 
  
 

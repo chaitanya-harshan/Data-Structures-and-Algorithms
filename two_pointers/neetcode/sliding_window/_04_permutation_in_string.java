@@ -29,19 +29,16 @@ public class _04_permutation_in_string {
         // Slide the window through s2
         int l = 0;
         for (int r=s1.length(); r<s2.length(); l++, r++) {
-            char lc = s2.charAt(l);  // Character leaving the window
-            char rc = s2.charAt(r);  // Character entering the window
+            int lc = s2.charAt(l)-'a';  // Character leaving the window
+            int rc = s2.charAt(r)-'a';  // Character entering the window
 
-            s2map[lc-'a']--;
-            if (s1map[lc-'a'] == s2map[lc-'a']) matches++;
-            // If frequencies matched before but don't match now, decrement matches
-            else if (s1map[lc-'a'] - 1 == s2map[lc-'a']) matches--;
+            s2map[lc]--;
+            if (s1map[lc] == s2map[lc]) matches++;
+            else if (s1map[lc] == s2map[lc] + 1) matches--; // If frequencies matched before but don't match now, decrement matches
 
-            s2map[rc-'a']++;
-            // If after adding, frequencies match, increment matches
-            if (s1map[rc-'a'] == s2map[rc-'a']) matches++;
-            // If frequencies matched before but don't match now, decrement matches
-            else if (s1map[rc-'a'] + 1 == s2map[rc-'a']) matches--;
+            s2map[rc]++;
+            if (s1map[rc] == s2map[rc]) matches++; // If after adding, frequencies match, increment matches
+            else if (s1map[rc] == s2map[rc] - 1) matches--; // If frequencies matched before but don't match now, decrement matches
             // l++;
 
             // If all characters have matching frequencies, we found a permutation

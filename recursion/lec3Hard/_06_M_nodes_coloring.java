@@ -21,7 +21,7 @@ public class _06_M_nodes_coloring {
             if (isValid(node, c)) {
                 colors[node] = c;
                 if (not_dfs(node+1, m)) return true;
-                else colors[node] = 0;
+                colors[node] = 0;
             }
         }
         return false;
@@ -45,9 +45,8 @@ https://www.naukri.com/code360/problems/m-coloring-problem_981273
 
 You are given an undirected graph as an adjacency matrix consisting of 'v' vertices and an integer 'm'.
 
-
-
-You need to return 'YES' if you can color the graph using at most 'm' colors so that no two adjacent vertices are the same. Else, return 'NO'.
+You need to return 'YES' if you can color the graph using at most 'm' colors so that no two adjacent 
+vertices are the same. Else, return 'NO'.
 
 
 

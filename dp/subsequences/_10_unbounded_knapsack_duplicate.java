@@ -1,5 +1,7 @@
 package dp.subsequences;
 
+import java.util.Arrays;
+
 public class _10_unbounded_knapsack_duplicate {
     
     public static int unboundedKnapsack_2d_dp(int n, int w, int[] profit, int[] weight) {
@@ -32,7 +34,7 @@ public class _10_unbounded_knapsack_duplicate {
                 if (weight[i] <= k) {
                     // This is the key transition, directly parallel to Code 2.
                     // We either:
-                    // 1. Don't take item i (dp[k] keeps its current value)
+                    // 1. Don't take item i (dp[k] keeps its current value gotten from previous 'i')
                     // 2. Take item i (profit[i] + dp[k - weight[i]])
                     dp[k] = Math.max(dp[k], profit[i] + dp[k - weight[i]]);
                 }
@@ -44,26 +46,27 @@ public class _10_unbounded_knapsack_duplicate {
     }
     
     // gfg
-    // public static int knapSack(int val[], int weight[], int capacity) {
-    //     // code here
-    //     int n = weight.length;
-    //     int[][] dp = new int[n][capacity+1];
-    //     Arrays.stream(dp).forEach(row -> Arrays.fill(row,-1));
+    public static int knapSack(int val[], int weight[], int capacity) {
+        // code here
+        int n = weight.length;
+        int[][] dp = new int[n][capacity+1];
+        Arrays.stream(dp).forEach(row -> Arrays.fill(row,-1));
         
-    //     return knapsack(0, capacity, val, weight, dp, n);
-    // }
+        return knapsack(0, capacity, val, weight, dp, n);
+    }
     
-    // public static int knapsack(int i, int wt, int[] val, int[] weight, int[][] dp, int n) {
-    //     if (i == n-1) return (wt/weight[i])*val[i];
-    //     // if (i == n) return 0; // not needed as we used i=n-1
-    //     if (dp[i][wt] != -1) return dp[i][wt];
+    public static int knapsack(int i, int wt, int[] val, int[] weight, int[][] dp, int n) {
+        // if (i == n-1) return (val[i]/weight[i]) * wt;
+        // if you can take fractions of an item, you do not use Dynamic Programming. The problem becomes a Greedy problem.
+        if (i == n) return 0;
+        if (dp[i][wt] != -1) return dp[i][wt];
         
-    //     int taken = 0;
-    //     if (wt >= weight[i]) taken = val[i] + knapsack(i, wt-weight[i], val, weight, dp, n);
-    //     int notTaken = knapsack(i+1, wt, val, weight, dp, n);
+        int noTake = knapsack(i+1, wt, val, weight, dp, n);
+        int take = 0;
+        if (weight[i] <= wt) take = val[i] + knapsack(i, wt-weight[i], val, weight, dp, n);
         
-    //     return dp[i][wt] = Math.max(taken, notTaken);
-    // }
+        return dp[i][wt] = Math.max(take, noTake);
+    }
 }
 
 /*

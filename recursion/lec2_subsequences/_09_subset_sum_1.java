@@ -20,28 +20,27 @@ So, subset sum are [0,1,2,3].
 
 https://practice.geeksforgeeks.org/problems/subset-sums2234/1
 https://www.naukri.com/code360/problems/subset-sum_3843086
+https://www.geeksforgeeks.org/problems/subset-sums2234/1
  */
 package recursion.lec2_subsequences;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class _09_subset_sum_1 {
     
-    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n) {
-        // code here
-        ArrayList<Integer> sums = new ArrayList<>();
-        backtrack(sums, 0, 0, arr, n);
-        return sums;
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        ArrayList<Integer> res = new ArrayList<>();
+        backtrack(0, 0, res, arr);
+        return res;
     }
     
-    static void backtrack(List<Integer> sums, int k, int sum, List<Integer> arr, int n) {
-        if (k == n) {
-            sums.add(sum);
+    private void backtrack(int i, int sum, ArrayList<Integer> res, int[] arr) {
+        if (i == arr.length) {
+            res.add(sum);
             return;
         }
         
-        backtrack(sums, k+1, sum+arr.get(k), arr, n);
-        backtrack(sums, k+1, sum, arr, n);
+        backtrack(i+1, sum, res, arr);
+        backtrack(i+1, sum + arr[i], res, arr);
     }
 }

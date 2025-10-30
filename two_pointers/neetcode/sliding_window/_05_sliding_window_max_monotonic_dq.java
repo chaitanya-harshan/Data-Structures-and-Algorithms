@@ -1,37 +1,29 @@
 package two_pointers.neetcode.sliding_window;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 public class _05_sliding_window_max_monotonic_dq {
     
     public int[] maxSlidingWindow(int[] nums, int k) {
-        int[] res = new int[nums.length-k+1];
-
-        // Deque stores indices, maintaining decreasing order of values
-        Deque<Integer> q = new LinkedList<>();
+        int n = nums.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] res = new int[n-k+1];
         int l = 0;
 
-        for (int r = 0; r < nums.length; r++) {
-            // Remove indices that are outside current window
-            while (!q.isEmpty() && q.peekFirst() <= r-k) q.removeFirst();
+        for (int r=0; r<n; r++) {
+            if (!q.isEmpty() && q.peekLast() <= r-k) q.pollLast();
+            while (!q.isEmpty() && nums[q.peek()] < nums[r]) {
+                q.pop();
+            }
+            q.push(r);
 
-            // Remove all elements from back of deque that are smaller than current element
-            // This maintains monotonic decreasing order - largest elements at front
-            // We don't need smaller elements since they can never be the max
-            while (!q.isEmpty() && nums[q.peekLast()] < nums[r]) q.removeLast();
-
-            // Add current index to back of deque
-            // After removing smaller elements, this maintains decreasing order
-            q.addLast(r);
-
-            // When we have a full window, record the maximum (front of deque)
             if (r >= k-1) {
-                res[l] = nums[q.peekFirst()];
-                l++;
+                res[l++] = nums[q.peekLast()];
             }
         }
         return res;
+    }
 
 
 
@@ -53,7 +45,6 @@ public class _05_sliding_window_max_monotonic_dq {
         //     res[l] = pq.peek();
         // }
         // return res;
-    }
 }
 
 /*
