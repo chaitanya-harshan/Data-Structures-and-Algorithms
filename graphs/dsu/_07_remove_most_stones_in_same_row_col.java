@@ -22,18 +22,40 @@ public class _07_remove_most_stones_in_same_row_col {
         }
 
         // Initially we have max row + call + 2 unique notes in the Union-Find. But we are going to combine some of 
-        // the notes, that is, rows and columns. But in the end we won't touch some rows and columns in the     
+        // the nodes, that is, rows and columns. But in the end we won't touch some rows and columns in the     
         // Union-Find cause there aren't stones, so they will live as separate nodes. But we only want the 
         // component where things are connected. Therefore we iterate and try to find the unique items instead of 
         // just calling uf.sets 
 
         // Here we iterate through only the stones so the nodes which persisted in the uf due to no stones in them
         // won't be called and effect the set size.
+
+        // To determine the maximum number of stones that can be removed,
+        // we want to count the number of connected components among all stones.
+        // Each connected component must retain at least one stone.
+        // We use a HashSet to collect all unique root parents of the nodes
+        // corresponding to stones (either row or column for each stone, since
+        // all are connected in the DSU).
+        //
+        // For each stone, 's[0]' is the row number, and we pass it to uf.find to
+        // get its representative/root in the union-find structure.
+        // (We could also use 's[1]' + offset, since each row and its columns
+        // were unioned. Either would work as both endpoints are joined.)
+        //
+        // After gathering all unique roots, the number of connected components
+        // is simply the set size. The answer is then the total number of stones
+        // minus the number of components, as we must leave at least one in each.
+
+
+        // each stone has one parent (itself) but we made sure that all connected stones have the same parent.
+        // we are supposed to get stones.length but since we made connected componnents to have the same parent,
+        // we will get less number of parents 
         HashSet<Integer> set = new HashSet<>();
-        for (int[] s: stones) {
-            set.add(uf.find(s[0])); // using s[1] will result the same as they are already connected
+        for (int[] s : stones) {
+            set.add(uf.find(s[0])); // Find unique component representatives for each stone.
         }
 
+        // The maximum stones we can remove equals total stones minus the number of components.
         return stones.length - set.size();
     }
 }

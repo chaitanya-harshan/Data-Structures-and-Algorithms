@@ -6,7 +6,7 @@ import java.util.Queue;
 public class _07_01_matrix___multi_source_bfs_prob {
     // instead of find distance from any random nodes, we reverse the question and 
     // start from target element and go away from it in steps and the no.of steps to reach 
-    // will the cur node will be the distance b/w cur and target
+    // the cur node will be the distance b/w cur and target
     public int[][] updateMatrix(int[][] mat) {
         int m = mat.length, n = mat[0].length;
 

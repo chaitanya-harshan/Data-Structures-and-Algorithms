@@ -1,5 +1,7 @@
 package graphs.dsu;
 
+import java.util.PriorityQueue;
+
 public class _11_swim_in_rising_water {
     public int swimInWater(int[][] grid) {
         int n = grid.length;

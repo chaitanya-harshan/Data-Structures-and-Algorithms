@@ -20,12 +20,12 @@ public class _12_number_of_distinct_islands {
 	}
 
 	static void dfs(int[][] arr, boolean[][] visited, List<String> path, int i, int j, int x, int y) {
+        int n = arr.length, m = arr[0].length;
 		visited[i][j] = true;
 		path.add(Integer.toString(i-x) + " " + Integer.toString(j-y));
 
 		int[] dr = {-1, 0, 1, 0};
 		int[] dc = {0, -1, 0, 1};
-        int n = arr.length, m = arr[0].length;
 		
         for (int d=0; d<4; d++) {
             int r = i+dr[d];

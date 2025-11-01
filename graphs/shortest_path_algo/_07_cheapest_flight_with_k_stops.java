@@ -2,7 +2,7 @@ package graphs.shortest_path_algo;
 
 import java.util.*;
 
-public class _07_cheapest_flight_with_k_distance {
+public class _07_cheapest_flight_with_k_stops {
     // variaiton of Bellman-Ford. this is a bfs traversal of steps
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
         List<Flight>[] adj = new ArrayList[n];
@@ -14,6 +14,8 @@ public class _07_cheapest_flight_with_k_distance {
         // costs[src] = 0; // not needed as u put 0 cost as starting in the pq or queue
 
         // PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> (a[2]-b[2]));
+        // sometimes we need to use a costlier path to reach less costlier path in the future in k limit.
+        // so we need to try out all possibilities and not just the low cost paths.
         Queue<int[]> pq = new LinkedList<>();
         pq.offer(new int[]{src, 0, 0}); // node, edge_wt, k
 
@@ -25,12 +27,12 @@ public class _07_cheapest_flight_with_k_distance {
             if (cf > k) continue;
 
             for (Flight nei: adj[cur]) {
-                int node = nei.flight;
+                int neiNode = nei.flight;
                 int price = nei.price;
 
-                if (wt + price < costs[node]) {
-                    costs[node] = wt + price;
-                    pq.offer(new int[]{node, costs[node], cf+1});
+                if (wt + price < costs[neiNode]) {
+                    costs[neiNode] = wt + price;
+                    pq.offer(new int[]{neiNode, costs[neiNode], cf+1});
                 }
             }
         }
@@ -44,15 +46,15 @@ public class _07_cheapest_flight_with_k_distance {
         for (int i = 0; i < n; i++) adj[i] = new ArrayList<>();
         for (int[] f : flights) adj[f[0]].add(new Flight(f[1], f[2]));
 
-        // PQ items: {costSoFar, node, stopsSoFar}
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[1] - b[1]);
-        pq.offer(new int[]{src, 0, 0});
-
         // stops[node] = minimum number of stops we've used to reach node so far
         // if we later reach node with more stops than stops[node], skip it.
         int[] stops = new int[n];
         Arrays.fill(stops, Integer.MAX_VALUE);
         // stops[src] = 0;
+
+        // PQ items: {costSoFar, node, stopsSoFar}
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[1] - b[1]);
+        pq.offer(new int[]{src, 0, 0});
 
         while (!pq.isEmpty()) {
             int cur = pq.peek()[0];
@@ -110,7 +112,8 @@ class Flight {
 
 787. Cheapest Flights Within K Stops
 
-There are n cities connected by some number of flights. You are given an array flights where flights[i] = [fromi, toi, pricei] indicates that there is a flight from city fromi to city toi with cost pricei.
+There are n cities connected by some number of flights. You are given an array flights where 
+flights[i] = [fromi, toi, pricei] indicates that there is a flight from city fromi to city toi with cost pricei.
 You are also given three integers src, dst, and k, return the cheapest price from src to dst with at most k stops. If there is no such route, return -1.
 
  

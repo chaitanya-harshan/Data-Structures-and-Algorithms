@@ -27,7 +27,7 @@ public class _02_cnt_num_of_complete_connected_components {
                 int[] cnt = new int[2]; // [nodeCnt, edgeCnt]
                 dfs(i, adj, visited, cnt);
 
-                if (cnt[0]*(cnt[0]-1)/2 == cnt[1]/2) // nc*(nc-1) == edgeCnt/2;
+                if (cnt[0]*(cnt[0]-1)/2 == cnt[1]/2) // nc*(nc-1)/2 == edgeCnt/2;
                     components++;
             }
         }
